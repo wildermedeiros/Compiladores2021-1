@@ -36,7 +36,7 @@ void DataType():
 
 
 
-
+Teste
 
 
 
@@ -54,3 +54,4 @@ Start : script
 <ID> ::= <LETRA>(<LETRA> | <DIGITO>)*
 
 LETRA ::= [A-Z][a-z]
+
