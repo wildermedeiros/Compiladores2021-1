@@ -15,8 +15,6 @@ public class FreshMeat{  public static void main(String args []) throws ParseE
 | < TO : "to">
 | < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )?>
 | < #DIGIT : [ "0"-"9" ] >
-
-teste
 }TOKEN :{  < DECIMAL : (< DIGIT >)+ >| < #DIGIT : [ "0"-"9" ] >
 | < ID  : < LETTER > (< LETTER > | < DIGIT >)* >
 | < LETTER : ["A"-"Z" ] | ["a"-"z"] >}int start() :{}{
