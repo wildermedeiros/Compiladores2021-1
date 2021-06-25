@@ -48,7 +48,19 @@ Start : script
 	int identifier;
 	string identifier;
 	bool identifier; 
+	
+	if ( variable operação variable )
+	{
+		true
+	}
+	else
+	{
+		false
+	}
+	
 }
+
+
 
 
 <ID> ::= <LETRA>(<LETRA> | <DIGITO>)*
