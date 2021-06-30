@@ -33,7 +33,14 @@ void DataType():
 <CLOSEBLOCK>
 
 
+Para testes:
 
+using talnamespace;
+
+Start: script
+{
+	int numero;
+}
 
 
 
