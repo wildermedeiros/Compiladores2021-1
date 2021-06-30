@@ -1,0 +1,221 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  static = true;
+}
+
+PARSER_BEGIN(FreshMeat)
+
+public class FreshMeat
+{
+  public static void main(String args []) throws ParseException
+  {
+    FreshMeat parser = new FreshMeat(System.in);
+    while (true)
+    {
+      System.out.println("Reading from standard input...");
+      System.out.print("Enter an expression:");
+      try
+      {
+        switch (FreshMeat.start())
+        {
+          case 0 : 
+          System.out.println("OK.");
+          break;
+          case 1 : 
+          System.out.println("Goodbye.");
+          break;
+          default : 
+          break;
+        }
+      }
+      catch (Exception e)
+      {
+        System.out.println("NOK.");
+        System.out.println(e.getMessage());
+        FreshMeat.ReInit(System.in);
+      }
+      catch (Error e)
+      {
+        System.out.println("Oops.");
+        System.out.println(e.getMessage());
+        break;
+      }
+    }
+  }
+}
+
+PARSER_END(FreshMeat)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : /* Reserved words */
+{
+  	< STARTSCRIPT : "Start" >
+| 	< INTEGERTYPE : "int" >
+| 	< STRINGTYPE : "string" >
+| 	< BOOLTYPE : "bool" >
+| 	< USING : "using" >
+| 	< IF : "if">
+| 	< THEN : "then">
+| 	< ELSE : "else">
+| 	< FOR : "for">
+| 	< TO : "to">
+|   < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+| 	< #DIGIT : [ "0"-"9" ] >
+| 	< OPENBLOCK : "{" >
+| 	< CLOSEBLOCK : "}" >
+
+}
+
+TOKEN : /*OPERADORES*/
+{
+	< SUM: "+" >
+|	< MINUS: "-" >
+|	< PLUS: "*" >
+|	< DIVIDE: "/" >	
+|	< ASSIGNMENT: "=">
+|	< GREATER: ">" >
+|	< LESS: "<" >
+|	< GREATEREQUAL: ">=" >
+|	< LESSEQUAL: "<=" >
+|	< DIFFERENCE: "!=" >
+|	< EQUAL: "==" >
+	
+}
+
+TOKEN :
+{
+ 	< ID  : < LETTER > (< LETTER > | < DIGIT >)* >
+| 	< LETTER : ["A"-"Z" ] | ["a"-"z"] >
+| 	< VARCHARDELIMITER : "'" >
+| 	< SEMICOLON : ";" >
+| 	< COMMA : "," >
+| 	< DOUBLEPOINTS : ":" >
+| 	< LEFTPARENT : "(" >
+| 	< RIGHTPARENT : ")" >
+| 	< HASHTAG : "#" >
+
+}
+
+int start() :{}
+{
+	(UsingDeclaration())*
+	  
+	<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
+	<OPENBLOCK>
+	
+		(Block())+
+	
+	<CLOSEBLOCK>
+
+{ return 0; }
+}
+
+void Block(): {}
+{
+  	(VariableDeclaration())
+
+	Assignment()
+
+  	//(Command())	
+}
+
+//void Command(): {}
+//{
+//	
+//}
+
+void Assignment(): {}
+{
+	<ID> <ASSIGNMENT> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>) <SEMICOLON>
+}
+
+//void UseIf():
+//{}
+//{
+//  	< IF > < LEFPARENT > variable BoolOperation() variable < RIGHPARENT >
+//  	< OPENBLOCK >
+//		LOGIC
+//
+//	< ELSE >
+//	< OPENBLOCK >
+//		LOGIC
+//	< CLOSEBLOCK >
+//
+//	< CLOSEBLOCK >
+//
+//  	
+//}
+
+void UsingDeclaration(): {}
+{
+  // can be using talname; 
+  (<USING> <ID> <SEMICOLON>)
+}
+
+void VariableDeclaration(): {}
+{
+  // Colocar a possibilidade de declarar a variável e inicializa-la e ser opcional 
+  (DataType() <ID> <SEMICOLON>)
+}
+
+void DataType(): {}
+{
+  < INTEGERTYPE > | < STRINGTYPE > | < BOOLTYPE >
+}
+
+//void IdentifierList() : {}
+//{
+//	<IDENTIFIER> ("," <IDENTIFIER>)*
+//}
+
+
+
+//void sum() :
+//{}
+//{
+//  term()
+//  (
+//    (
+//      < PLUS >
+//    | < MINUS >
+//    )
+//    term()
+//  )*
+//}
+//
+//void term() :
+//{}
+//{
+//  unary()
+//  (
+//    (
+//      < MULTIPLY >
+//    | < DIVIDE >
+//    )
+//    unary()
+//  )*
+//}
+//
+//void unary() :
+//{}
+//{
+//  < MINUS > element()
+//| element()
+//}
+//
+//void element() :
+//{}
+//{
+//  < CONSTANT >
+//| "(" sum() ")"
+//}
