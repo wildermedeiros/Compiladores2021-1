@@ -113,18 +113,18 @@ int start() :{}
 	<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
 	<OPENBLOCK>
 	
-		(Block())+
+		(Block())*
 	
 	<CLOSEBLOCK>
-
+	
 { return 0; }
 }
 
 void Block(): {}
 {
-  	(VariableDeclaration())
+  	(VariableDeclaration())*
 
-	Assignment()
+	(Assignment())
 
   	//(Command())	
 }

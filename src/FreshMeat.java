@@ -55,17 +55,18 @@ public class FreshMeat implements FreshMeatConstants {
     jj_consume_token(OPENBLOCK);
     label_2:
     while (true) {
-      Block();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case INTEGERTYPE:
       case STRINGTYPE:
       case BOOLTYPE:
+      case ID:
         ;
         break;
       default:
         jj_la1[1] = jj_gen;
         break label_2;
       }
+      Block();
     }
     jj_consume_token(CLOSEBLOCK);
   {if (true) return 0;}
@@ -73,7 +74,20 @@ public class FreshMeat implements FreshMeatConstants {
   }
 
   static final public void Block() throws ParseException {
-    VariableDeclaration();
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case INTEGERTYPE:
+      case STRINGTYPE:
+      case BOOLTYPE:
+        ;
+        break;
+      default:
+        jj_la1[2] = jj_gen;
+        break label_3;
+      }
+      VariableDeclaration();
+    }
     Assignment();
   }
 
@@ -94,7 +108,7 @@ public class FreshMeat implements FreshMeatConstants {
       jj_consume_token(VARCHARDELIMITER);
       break;
     default:
-      jj_la1[2] = jj_gen;
+      jj_la1[3] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -141,7 +155,7 @@ public class FreshMeat implements FreshMeatConstants {
       jj_consume_token(BOOLTYPE);
       break;
     default:
-      jj_la1[3] = jj_gen;
+      jj_la1[4] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -157,7 +171,7 @@ public class FreshMeat implements FreshMeatConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[4];
+  static final private int[] jj_la1 = new int[5];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -165,10 +179,10 @@ public class FreshMeat implements FreshMeatConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x200,0x1c0,0x8000,0x1c0,};
+      jj_la1_0 = new int[] {0x200,0x400001c0,0x1c0,0x8000,0x1c0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x1,0x0,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x1,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -189,7 +203,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -203,7 +217,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -220,7 +234,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -230,7 +244,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -246,7 +260,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -255,7 +269,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -311,7 +325,7 @@ public class FreshMeat implements FreshMeatConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
