@@ -69,6 +69,7 @@ TOKEN : /* Reserved words */
 | 	< ELSE : "else">
 | 	< FOR : "for">
 | 	< TO : "to">
+| 	< WHILE : "while" >
 |   < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
 | 	< #DIGIT : [ "0"-"9" ] >
 | 	< OPENBLOCK : "{" >
@@ -113,7 +114,7 @@ int start() :{}
 	<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
 	<OPENBLOCK>
 	
-		(Block())*
+		(Block())+
 	
 	<CLOSEBLOCK>
 	
@@ -124,23 +125,30 @@ void Block(): {}
 {
   	(VariableDeclaration())*
 
-	(Assignment())
-
-  	//(Command())	
+  	Command()
 }
 
-//void Command(): {}
-//{
-//	
-//}
+void Command(): {}
+{
+	Assignment()
+
+	// deixei assim pra visualizar os pulos pela procura de token do lookahead
+| 	LOOKAHEAD(2)<IF> LogicExpression() <THEN>
+				(<OPENBLOCK>	Command()	<CLOSEBLOCK> )?
+				(<ELSE>		<OPENBLOCK>		Command()	<CLOSEBLOCK> )?
+
+| 	ForTo()
+
+| 	While()
+ 	
+} 
 
 void Assignment(): {}
 {
 	<ID> <ASSIGNMENT> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>) <SEMICOLON>
 }
 
-//void UseIf():
-//{}
+//void UseIf(): {}
 //{
 //  	< IF > < LEFPARENT > variable BoolOperation() variable < RIGHPARENT >
 //  	< OPENBLOCK >
@@ -152,9 +160,45 @@ void Assignment(): {}
 //	< CLOSEBLOCK >
 //
 //	< CLOSEBLOCK >
-//
-//  	
+ 	
 //}
+
+void ForTo(): { }
+{
+	<FOR> Assignment() <TO> ExpressionArguments()
+ 	(<OPENBLOCK>
+ 		Command()
+ 	<CLOSEBLOCK> )
+}
+
+void While(): { }
+{
+	<WHILE> LogicExpression()
+ 	(<OPENBLOCK>
+ 		Command()
+ 	<CLOSEBLOCK> )
+}
+
+void LogicExpression(): {}
+{
+  	ExpressionArguments() (LogicOperator() ExpressionArguments())+
+}
+
+void ExpressionArguments(): {}
+{
+  	< ID > | < NUMBER >
+}
+
+void LogicOperator(): { }
+{
+  	< GREATER >
+|	< LESS>
+|	< GREATEREQUAL>
+|	< LESSEQUAL>
+|	< DIFFERENCE>
+|	< EQUAL>
+
+}
 
 void UsingDeclaration(): {}
 {

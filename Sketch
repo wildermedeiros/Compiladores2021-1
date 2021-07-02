@@ -1,0 +1,92 @@
+
+<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
+<OPENBLOCK>
+ 
+(VariableDeclaration())* 
+
+(FunctionDeclaration())*
+
+(UseIf())*
+
+(UseWhile())*
+
+(UseFor())*
+
+void IncludeDeclaration():
+{
+	<#> <INCLUDE> <ID> <SEMICOLON>
+}
+
+void VariableDeclaration():
+{
+  (DataType() < ID > <SEMICOLON >)
+}
+
+void DataType():
+{
+  < INTEGERTYPE > |< STRINGTYPE > | < BOOLTYPE >
+}
+
+
+
+
+<CLOSEBLOCK>
+
+
+Para testes:
+
+using talnamespace;
+
+Start: script
+{
+
+	while isTrue > isFalse
+	{
+		aqueleNumeroCabuloso = 4;
+	}
+	
+}
+
+
+	if isfalse > istrue then
+	{		
+		numero = 1;
+	}
+	else
+	{
+		otonumero = 2;
+	}
+	
+	for numero = 1; to 5
+	{
+		meuotonumero = 3; 
+	}
+
+
+
+
+using talnamespace;
+
+Start : script 
+{
+	int identifier;
+	string identifier;
+	bool identifier; 
+	
+	if ( variable operação variable )
+	{
+		true
+	}
+	else
+	{
+		false
+	}
+	
+}
+
+
+
+
+<ID> ::= <LETRA>(<LETRA> | <DIGITO>)*
+
+LETRA ::= [A-Z][a-z]
