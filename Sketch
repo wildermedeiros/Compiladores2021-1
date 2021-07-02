@@ -39,12 +39,9 @@ using talnamespace;
 
 Start: script
 {
-
-	while isTrue > isFalse
-	{
-		aqueleNumeroCabuloso = 4;
-	}
+	int numero = 2, otnunero = 3, varisnumeros = 4;
 	
+	numero = 1;
 }
 
 
@@ -61,6 +58,13 @@ Start: script
 	{
 		meuotonumero = 3; 
 	}
+	
+	while isTrue > isFalse
+	{
+		aqueleNumeroCabuloso = 4;
+	}
+
+	
 
 
 
