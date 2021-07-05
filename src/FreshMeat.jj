@@ -15,8 +15,8 @@ public class FreshMeat
     FreshMeat parser = new FreshMeat(System.in);
     while (true)
     {
-      System.out.println("Reading from standard input...");
-      System.out.print("Enter an expression:");
+      System.out.println("Lendo através da entrada padrão...");
+      System.out.print("Digite uma expressão:");
       try
       {
         switch (FreshMeat.start())
@@ -25,7 +25,7 @@ public class FreshMeat
           System.out.println("OK.");
           break;
           case 1 : 
-          System.out.println("Goodbye.");
+          System.out.println("Tchau.");
           break;
           default : 
           break;
@@ -33,13 +33,13 @@ public class FreshMeat
       }
       catch (Exception e)
       {
-        System.out.println("NOK.");
+        System.out.println("Exception: A expressão inserida não está correta, verifique por favor com as instruções abaixo e tente novamente.");
         System.out.println(e.getMessage());
         FreshMeat.ReInit(System.in);
       }
       catch (Error e)
       {
-        System.out.println("Oops.");
+        System.out.println("Error: A entrada inserida não é um token válido, revise por favor e tente novamente");
         System.out.println(e.getMessage());
         break;
       }

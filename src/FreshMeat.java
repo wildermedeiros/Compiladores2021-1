@@ -5,8 +5,8 @@ public class FreshMeat implements FreshMeatConstants {
     FreshMeat parser = new FreshMeat(System.in);
     while (true)
     {
-      System.out.println("Reading from standard input...");
-      System.out.print("Enter an expression:");
+      System.out.println("Lendo atrav\u00e9s da entrada padr\u00e3o...");
+      System.out.print("Digite uma express\u00e3o:");
       try
       {
         switch (FreshMeat.start())
@@ -15,7 +15,7 @@ public class FreshMeat implements FreshMeatConstants {
           System.out.println("OK.");
           break;
           case 1 :
-          System.out.println("Goodbye.");
+          System.out.println("Tchau.");
           break;
           default :
           break;
@@ -23,13 +23,13 @@ public class FreshMeat implements FreshMeatConstants {
       }
       catch (Exception e)
       {
-        System.out.println("NOK.");
+        System.out.println("Exception: A express\u00e3o inserida n\u00e3o est\u00e1 correta, verifique por favor com as instru\u00e7\u00f5es abaixo e tente novamente.");
         System.out.println(e.getMessage());
         FreshMeat.ReInit(System.in);
       }
       catch (Error e)
       {
-        System.out.println("Oops.");
+        System.out.println("Error: A entrada inserida n\u00e3o \u00e9 um token v\u00e1lido, revise por favor e tente novamente");
         System.out.println(e.getMessage());
         break;
       }
