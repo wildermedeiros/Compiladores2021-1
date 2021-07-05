@@ -1,3 +1,9 @@
+Duvidas:
+	1. O que pode ser feito para tirar a necessidade do lookAhead
+	2. Como lidar com os choices conflicts
+	3. Como foi feito para ter essas possibilidades de ter vazio
+	
+
 
 <STARTSCRIPT> <DOUBLEPOINTS> <ID> 
 <OPENBLOCK>
@@ -35,15 +41,15 @@ void DataType():
 
 Para testes:
 
-using talnamespace;
+using talnamespace
 
 Start: script
 {
 	int numero = 2, otnunero = 3, varisnumeros = 4;
 	
 	numero = 1;
+	
 }
-
 
 	if isfalse > istrue then
 	{		
@@ -64,6 +70,7 @@ Start: script
 		aqueleNumeroCabuloso = 4;
 	}
 
+	
 	
 
 
@@ -87,6 +94,21 @@ Start : script
 	}
 	
 }
+
+//void UseIf(): {}
+//{
+//  	< IF > < LEFPARENT > variable BoolOperation() variable < RIGHPARENT >
+//  	< OPENBLOCK >
+//		LOGIC
+//
+//	< ELSE >
+//	< OPENBLOCK >
+//		LOGIC
+//	< CLOSEBLOCK >
+//
+//	< CLOSEBLOCK >
+ 	
+//}
 
 
 

@@ -138,21 +138,7 @@ public class FreshMeat implements FreshMeatConstants {
 
   static final public void Assignment() throws ParseException {
     jj_consume_token(ID);
-    jj_consume_token(ASSIGNMENT);
-    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case NUMBER:
-      jj_consume_token(NUMBER);
-      break;
-    case VARCHARDELIMITER:
-      jj_consume_token(VARCHARDELIMITER);
-      jj_consume_token(ID);
-      jj_consume_token(VARCHARDELIMITER);
-      break;
-    default:
-      jj_la1[6] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
+    Inicialization();
     jj_consume_token(SEMICOLON);
   }
 
@@ -168,26 +154,12 @@ public class FreshMeat implements FreshMeatConstants {
       jj_consume_token(VARCHARDELIMITER);
       break;
     default:
-      jj_la1[7] = jj_gen;
+      jj_la1[6] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
-//void UseIf(): {}
-//{
-//  	< IF > < LEFPARENT > variable BoolOperation() variable < RIGHPARENT >
-//  	< OPENBLOCK >
-//		LOGIC
-//
-//	< ELSE >
-//	< OPENBLOCK >
-//		LOGIC
-//	< CLOSEBLOCK >
-//
-//	< CLOSEBLOCK >
-
-//}
   static final public void ForTo() throws ParseException {
     jj_consume_token(FOR);
     Assignment();
@@ -222,8 +194,28 @@ public class FreshMeat implements FreshMeatConstants {
         ;
         break;
       default:
-        jj_la1[8] = jj_gen;
+        jj_la1[7] = jj_gen;
         break label_4;
+      }
+    }
+  }
+
+  static final public void MathExpression() throws ParseException {
+    ExpressionArguments();
+    label_5:
+    while (true) {
+      MathOperator();
+      ExpressionArguments();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case SUM:
+      case MINUS:
+      case PLUS:
+      case DIVIDE:
+        ;
+        break;
+      default:
+        jj_la1[8] = jj_gen;
+        break label_5;
       }
     }
   }
@@ -238,6 +230,27 @@ public class FreshMeat implements FreshMeatConstants {
       break;
     default:
       jj_la1[9] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void MathOperator() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case SUM:
+      jj_consume_token(SUM);
+      break;
+    case MINUS:
+      jj_consume_token(MINUS);
+      break;
+    case PLUS:
+      jj_consume_token(PLUS);
+      break;
+    case DIVIDE:
+      jj_consume_token(DIVIDE);
+      break;
+    default:
+      jj_la1[10] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -264,7 +277,7 @@ public class FreshMeat implements FreshMeatConstants {
       jj_consume_token(EQUAL);
       break;
     default:
-      jj_la1[10] = jj_gen;
+      jj_la1[11] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -278,7 +291,7 @@ public class FreshMeat implements FreshMeatConstants {
 
   static final public void VariableDeclaration() throws ParseException {
     DataType();
-    label_5:
+    label_6:
     while (true) {
       IDList();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -287,8 +300,8 @@ public class FreshMeat implements FreshMeatConstants {
         ;
         break;
       default:
-        jj_la1[11] = jj_gen;
-        break label_5;
+        jj_la1[12] = jj_gen;
+        break label_6;
       }
     }
     jj_consume_token(SEMICOLON);
@@ -306,7 +319,7 @@ public class FreshMeat implements FreshMeatConstants {
       jj_consume_token(BOOLTYPE);
       break;
     default:
-      jj_la1[12] = jj_gen;
+      jj_la1[13] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -321,7 +334,7 @@ public class FreshMeat implements FreshMeatConstants {
         Inicialization();
         break;
       default:
-        jj_la1[13] = jj_gen;
+        jj_la1[14] = jj_gen;
         ;
       }
       break;
@@ -333,12 +346,12 @@ public class FreshMeat implements FreshMeatConstants {
         Inicialization();
         break;
       default:
-        jj_la1[14] = jj_gen;
+        jj_la1[15] = jj_gen;
         ;
       }
       break;
     default:
-      jj_la1[15] = jj_gen;
+      jj_la1[16] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -352,6 +365,11 @@ public class FreshMeat implements FreshMeatConstants {
   }
 
   static private boolean jj_3R_7() {
+    if (jj_3R_8()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_8() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(31)) {
@@ -363,11 +381,6 @@ public class FreshMeat implements FreshMeatConstants {
 
   static private boolean jj_3_1() {
     if (jj_scan_token(IF)) return true;
-    if (jj_3R_6()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_6() {
     if (jj_3R_7()) return true;
     return false;
   }
@@ -384,7 +397,7 @@ public class FreshMeat implements FreshMeatConstants {
   static private Token jj_scanpos, jj_lastpos;
   static private int jj_la;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[16];
+  static final private int[] jj_la1 = new int[17];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -392,10 +405,10 @@ public class FreshMeat implements FreshMeatConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x200,0x8000a5c0,0x1c0,0x1000,0x80000000,0xa000,0x10000,0x10000,0x7e000000,0x80010000,0x7e000000,0x80000000,0x1c0,0x1000000,0x1000000,0x80000000,};
+      jj_la1_0 = new int[] {0x200,0x8000a5c0,0x1c0,0x1000,0x80000000,0xa000,0x10000,0x7e000000,0xf00000,0x80010000,0xf00000,0x7e000000,0x80000000,0x1c0,0x1000000,0x1000000,0x80000000,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x2,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x8,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x8,};
    }
   static final private JJCalls[] jj_2_rtns = new JJCalls[1];
   static private boolean jj_rescan = false;
@@ -419,7 +432,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -434,7 +447,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -452,7 +465,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -463,7 +476,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -480,7 +493,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -490,7 +503,7 @@ public class FreshMeat implements FreshMeatConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 17; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -607,7 +620,7 @@ public class FreshMeat implements FreshMeatConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 17; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
