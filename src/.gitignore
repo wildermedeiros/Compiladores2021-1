@@ -3,3 +3,8 @@
 /SimpleCharStream.java
 /Token.java
 /TokenMgrError.java
+/FreshMeat.jj
+/FreshMeatTreeConstants.java
+/JJTFreshMeatState.java
+/Node.java
+/SimpleNode.java

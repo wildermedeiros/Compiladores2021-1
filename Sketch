@@ -4,56 +4,19 @@ Duvidas:
 	3. Como foi feito para ter essas possibilidades de ter vazio
 	
 
-
-<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
-<OPENBLOCK>
- 
-(VariableDeclaration())* 
-
-(FunctionDeclaration())*
-
-(UseIf())*
-
-(UseWhile())*
-
-(UseFor())*
-
-void IncludeDeclaration():
-{
-	<#> <INCLUDE> <ID> <SEMICOLON>
-}
-
-void VariableDeclaration():
-{
-  (DataType() < ID > <SEMICOLON >)
-}
-
-void DataType():
-{
-  < INTEGERTYPE > |< STRINGTYPE > | < BOOLTYPE >
-}
-
-
-
-
-<CLOSEBLOCK>
-
-
 Para testes:
 
-using talnamespace
+using talnamespace;
 
 Start: script
 {
-	int numero = 2, otnunero = 3, varisnumeros = 4;
+	int numero = 'id', otnunero = 3, varisnumeros = 4;
 	
 	numero = 1;
 	
-}
-
 	if isfalse > istrue then
 	{		
-		numero = 1;
+		nnumero = 1;
 	}
 	else
 	{
@@ -69,50 +32,12 @@ Start: script
 	{
 		aqueleNumeroCabuloso = 4;
 	}
-
-	
-	
-
-
-
-
-using talnamespace;
-
-Start : script 
-{
-	int identifier;
-	string identifier;
-	bool identifier; 
-	
-	if ( variable operação variable )
-	{
-		true
-	}
-	else
-	{
-		false
-	}
-	
 }
 
-//void UseIf(): {}
-//{
-//  	< IF > < LEFPARENT > variable BoolOperation() variable < RIGHPARENT >
-//  	< OPENBLOCK >
-//		LOGIC
-//
-//	< ELSE >
-//	< OPENBLOCK >
-//		LOGIC
-//	< CLOSEBLOCK >
-//
-//	< CLOSEBLOCK >
- 	
-//}
+	// situação que a string não entende muito bem a situação do id '5id' 
+	int numero = '5id', otnunero = 3, varisnumeros = 4;
 
-
-
-
+	
 <ID> ::= <LETRA>(<LETRA> | <DIGITO>)*
 
 LETRA ::= [A-Z][a-z]

@@ -1,0 +1,239 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  static = true;
+}
+
+PARSER_BEGIN(FreshMeat)
+
+public class FreshMeat
+{
+  public static void main(String args []) throws ParseException
+  {
+    FreshMeat parser = new FreshMeat(System.in);
+    while (true)
+    {
+      System.out.println("Lendo através da entrada padrão...");
+      System.out.print("Digite uma expressão:");
+
+      SimpleNode simpleNode = FreshMeat.start();
+      simpleNode.dump("");
+      try
+      {
+        /*switch (FreshMeat.start())
+        {
+          case 0 : 
+          System.out.println("OK.");
+          break;
+          case 1 : 
+          System.out.println("Tchau.");
+          break;
+          default : 
+          break;
+        }*/
+      }
+      catch (Exception e)
+      {
+        System.out.println("Exception: A expressão inserida não está correta, verifique por favor com as instruções abaixo e tente novamente.");
+        System.out.println(e.getMessage());
+        FreshMeat.ReInit(System.in);
+      }
+      catch (Error e)
+      {
+        System.out.println("Error: A entrada inserida não é um token válido, revise por favor e tente novamente");
+        System.out.println(e.getMessage());
+        break;
+      }
+    }
+  }
+}
+
+PARSER_END(FreshMeat)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : /* Reserved words */
+{
+  	< STARTSCRIPT : "Start" >
+| 	< INTEGERTYPE : "int" >
+| 	< STRINGTYPE : "string" >
+| 	< BOOLTYPE : "bool" >
+| 	< USING : "using" >
+| 	< IF : "if">
+| 	< THEN : "then">
+| 	< ELSE : "else">
+| 	< FOR : "for">
+| 	< TO : "to">
+| 	< WHILE : "while" >
+|   < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+| 	< #DIGIT : [ "0"-"9" ] >
+| 	< OPENBLOCK : "{" >
+| 	< CLOSEBLOCK : "}" >
+
+}
+
+TOKEN : /*OPERADORES*/
+{
+	< SUM: "+" >
+|	< MINUS: "-" >
+|	< PLUS: "*" >
+|	< DIVIDE: "/" >	
+|	< ASSIGNMENT: "=">
+|	< GREATER: ">" >
+|	< LESS: "<" >
+|	< GREATEREQUAL: ">=" >
+|	< LESSEQUAL: "<=" >
+|	< DIFFERENCE: "!=" >
+|	< EQUAL: "==" >
+	
+}
+
+TOKEN :
+{
+ 	< ID  : < LETTER > (< LETTER > | < DIGIT >)* >
+| 	< LETTER : ["A"-"Z" ] | ["a"-"z"] >
+| 	< VARCHARDELIMITER : "'" >
+| 	< SEMICOLON : ";" >
+| 	< COMMA : "," >
+| 	< DOUBLEPOINTS : ":" >
+| 	< LEFTPARENT : "(" >
+| 	< RIGHTPARENT : ")" >
+| 	< HASHTAG : "#" >
+
+}
+
+SimpleNode start() :{}
+{
+	(UsingDeclaration())*
+	  
+	<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
+	<OPENBLOCK>
+	
+		(Block())+
+	
+	<CLOSEBLOCK>
+	
+{ return jjtThis; }
+}
+
+void Block(): {}
+{
+  	(VariableDeclaration())*
+
+  	Command()
+}
+
+void Command(): {}
+{
+	Assignment()
+
+	//Variable() < ASSIGNMENT > MathExpression() < SEMICOLON >
+
+	// deixei assim pra visualizar os pulos pela procura de token do lookahead
+| 	LOOKAHEAD(2)<IF> LogicExpression() <THEN>
+				(<OPENBLOCK>	Command()	<CLOSEBLOCK> )
+				(<ELSE>		<OPENBLOCK>		Command()	<CLOSEBLOCK> )? 
+ 
+| 	ForTo()
+
+| 	While()
+ 	
+}
+
+void Variable(): { }
+{
+	< ID >
+} 
+
+void Assignment(): {}
+{
+	<ID> Inicialization() <SEMICOLON>
+}
+
+void Inicialization(): { }
+{
+  	<ASSIGNMENT> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)
+}
+
+void ForTo(): { }
+{
+	<FOR> Assignment() <TO> ExpressionArguments()
+ 	(<OPENBLOCK>
+ 		Command()
+ 	<CLOSEBLOCK> )
+}
+
+void While(): { }
+{
+	<WHILE> LogicExpression()
+ 	(<OPENBLOCK>
+ 		Command()
+ 	<CLOSEBLOCK> )
+} 
+
+void LogicExpression(): {}
+{
+  	ExpressionArguments() (LogicOperator() ExpressionArguments())+
+}
+
+void MathExpression() : {}
+{
+	ExpressionArguments() (MathOperator() ExpressionArguments())+ 
+}
+
+void ExpressionArguments(): {}
+{
+  	< ID > | < NUMBER >
+}
+
+void MathOperator(): { }
+{
+		< SUM >
+	|	< MINUS >
+	|	< PLUS >
+	|	< DIVIDE >	
+}
+
+void LogicOperator(): { }
+{
+  		< GREATER >
+	|	< LESS>
+	|	< GREATEREQUAL>
+	|	< LESSEQUAL>
+	|	< DIFFERENCE>
+	|	< EQUAL>
+}
+
+void UsingDeclaration(): {}
+{
+  (<USING> <ID> <SEMICOLON>)
+}
+
+void VariableDeclaration(): {}
+{
+  (DataType() (IDList())+ <SEMICOLON>)
+}
+
+void DataType(): {}
+{
+  < INTEGERTYPE > | < STRINGTYPE > | < BOOLTYPE >
+}
+
+void IDList(): { }
+{
+	 <ID> (Inicialization())? | <COMMA> <ID> (Inicialization())? 
+}
+ 
+//void Semicolon(): { }
+//{
+//  	<SEMICOLON>
+//}
+
