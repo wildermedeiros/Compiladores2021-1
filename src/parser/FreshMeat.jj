@@ -9,6 +9,9 @@ options
 
 PARSER_BEGIN(FreshMeat)
 
+package parser;
+import recovery.*;
+
 public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants/*@egen*/
 {/*@bgen(jjtree)*/
   protected static JJTFreshMeatState jjtree = new JJTFreshMeatState();
@@ -52,6 +55,60 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants/*@egen*
       }
     }
   }
+
+  static public String im(int x)
+  {
+    int k;
+	String s;
+    s = tokenImage[x];
+    k = s.lastIndexOf("\"");
+    try {
+      s = s.substring(1,k);
+    }
+   catch (StringIndexOutOfBoundsException e)
+	   {}
+   return s;
+  }
+	 
+  static Token lastError = null;
+  static boolean eof;    // vari\u00e1vel que indica se EOF foi alcan\u00e7ado
+	
+  // o m\u00e9todo abaixo consome tokens at\u00e9 alcan\u00e7ar um que perten\u00e7a ao conjunto
+  // de sincroniza\u00e7\u00e3o
+  static void consumeUntil(RecoverySet g,
+	                 ParseException e,
+	                 String met) throws ParseEOFException,
+	                                    ParseException
+  {
+	Token tok;
+	System.out.println();
+	System.out.println("*** " + met + " ***");
+	System.out.println("     Conjunto de sincroniza\u00e7\u00e3o: " + g);
+		
+	if (g == null) throw e; // se o conjunto \u00e9 null, propaga a exce\u00e7\u00e3o
+	
+	tok = getToken(1); // pega token corrente
+	while ( ! eof )	{ // se n\u00e3o chegou ao fim do arquivo
+	  if ( g.contains(tok.kind)) {//achou um token no conjunto
+	    System.out.println("     Encontrado token de sincroniza\u00e7\u00e3o: " + 
+	                       im(tok.kind));
+	    break;
+	  }
+	  System.out.println("     Ignorando o token: " + im(tok.kind));
+	  getNextToken();     // pega pr\u00f3ximo token       
+      tok = getToken(1);
+	  if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?   
+	      eof = true;
+	}
+    if ( tok != lastError)  {
+	  System.out.println(e.getMessage());
+	  lastError = tok;
+	   
+	}
+	if ( eof )
+	  throw new ParseEOFException("Encontrei EOF onde n\u00e3o deveria.");
+  }
+  
 }
 
 PARSER_END(FreshMeat)
@@ -158,7 +215,7 @@ SimpleNode start() :{/*@bgen(jjtree) start */
         }
 /*@egen*/
 }
-
+ 
 void Block(): {/*@bgen(jjtree) Block */
   SimpleNode jjtn000 = new SimpleNode(JJTBLOCK);
   boolean jjtc000 = true;
@@ -234,23 +291,6 @@ void Command(): {/*@bgen(jjtree) Command */
 /*@egen*/
  	
 }
-
-void Variable(): {/*@bgen(jjtree) Variable */
-  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLE);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/ }
-{/*@bgen(jjtree) Variable */
-        try {
-/*@egen*/
-	< ID >/*@bgen(jjtree)*/
-        } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
-        }
-/*@egen*/
-} 
 
 void Assignment(): {/*@bgen(jjtree) Assignment */
   SimpleNode jjtn000 = new SimpleNode(JJTASSIGNMENT);
@@ -589,4 +629,5 @@ void IDList(): {/*@bgen(jjtree) IDList */
 //{
 //  	<SEMICOLON>
 //}
+
 
