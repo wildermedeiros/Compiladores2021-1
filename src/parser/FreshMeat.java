@@ -211,7 +211,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case ID:
-        Assignment();
+        VariableAssignment();
         break;
       default:
         jj_la1[4] = jj_gen;
@@ -269,14 +269,14 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     }
   }
 
-  static final public void Assignment() throws ParseException {
-                    /*@bgen(jjtree) Assignment */
-  SimpleNode jjtn000 = new SimpleNode(JJTASSIGNMENT);
+  static final public void VariableAssignment() throws ParseException {
+                            /*@bgen(jjtree) VariableAssignment */
+  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEASSIGNMENT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
       jj_consume_token(ID);
-      Inicialization();
+      VariableInicialization();
       jj_consume_token(SEMICOLON);
     } catch (Throwable jjte000) {
           if (jjtc000) {
@@ -299,9 +299,9 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     }
   }
 
-  static final public void Inicialization() throws ParseException {
-                        /*@bgen(jjtree) Inicialization */
-  SimpleNode jjtn000 = new SimpleNode(JJTINICIALIZATION);
+  static final public void VariableInicialization() throws ParseException {
+                                /*@bgen(jjtree) VariableInicialization */
+  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEINICIALIZATION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
@@ -334,7 +334,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   jjtree.openNodeScope(jjtn000);
     try {
       jj_consume_token(FOR);
-      Assignment();
+      VariableAssignment();
       jj_consume_token(TO);
       ExpressionArguments();
       jj_consume_token(OPENBLOCK);
@@ -673,7 +673,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
         jj_consume_token(ID);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case ASSIGNMENT:
-          Inicialization();
+          VariableInicialization();
           break;
         default:
           jj_la1[14] = jj_gen;
@@ -685,7 +685,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
         jj_consume_token(ID);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case ASSIGNMENT:
-          Inicialization();
+          VariableInicialization();
           break;
         default:
           jj_la1[15] = jj_gen;

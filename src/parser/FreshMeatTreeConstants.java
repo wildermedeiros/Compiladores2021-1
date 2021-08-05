@@ -6,8 +6,8 @@ public interface FreshMeatTreeConstants
   public int JJTSTART = 0;
   public int JJTBLOCK = 1;
   public int JJTCOMMAND = 2;
-  public int JJTASSIGNMENT = 3;
-  public int JJTINICIALIZATION = 4;
+  public int JJTVARIABLEASSIGNMENT = 3;
+  public int JJTVARIABLEINICIALIZATION = 4;
   public int JJTFORTO = 5;
   public int JJTWHILE = 6;
   public int JJTLOGICEXPRESSION = 7;
@@ -25,8 +25,8 @@ public interface FreshMeatTreeConstants
     "start",
     "Block",
     "Command",
-    "Assignment",
-    "Inicialization",
+    "VariableAssignment",
+    "VariableInicialization",
     "ForTo",
     "While",
     "LogicExpression",
@@ -40,4 +40,4 @@ public interface FreshMeatTreeConstants
     "IDList",
   };
 }
-/* JavaCC - OriginalChecksum=b83fb779ca1cbbf7733263cc8fa3a0dc (do not edit this line) */
+/* JavaCC - OriginalChecksum=ec6a465f1ad4d8537a8484c805f03386 (do not edit this line) */

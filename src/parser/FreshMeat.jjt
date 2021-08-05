@@ -190,7 +190,7 @@ void Block(): {}
 
 void Command(): {}
 {
-	Assignment()
+	VariableAssignment()
 
 	//Variable() < ASSIGNMENT > MathExpression() < SEMICOLON >
 
@@ -205,19 +205,19 @@ void Command(): {}
  	
 }
 
-void Assignment(): {}
+void VariableAssignment(): {}
 {
-	<ID> Inicialization() <SEMICOLON>
+	<ID> VariableInicialization() <SEMICOLON>
 }
 
-void Inicialization(): { }
+void VariableInicialization(): { }
 {
   	<ASSIGNMENT> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)
 }
 
 void ForTo(): { }
 {
-	<FOR> Assignment() <TO> ExpressionArguments()
+	<FOR> VariableAssignment() <TO> ExpressionArguments()
  	(<OPENBLOCK>
  		Command()
  	<CLOSEBLOCK> )
@@ -281,7 +281,7 @@ void DataType(): {}
 
 void IDList(): { }
 {
-	 <ID> (Inicialization())? | <COMMA> <ID> (Inicialization())? 
+	 <ID> (VariableInicialization())? | <COMMA> <ID> (VariableInicialization())? 
 }
  
 //void Semicolon(): { }
