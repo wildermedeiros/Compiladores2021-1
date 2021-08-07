@@ -33,56 +33,60 @@ public interface FreshMeatConstants {
   /** RegularExpression Id. */
   int WHILE = 15;
   /** RegularExpression Id. */
-  int NUMBER = 16;
+  int SUM = 16;
   /** RegularExpression Id. */
-  int DIGIT = 17;
+  int MINUS = 17;
   /** RegularExpression Id. */
-  int OPENBLOCK = 18;
+  int PLUS = 18;
   /** RegularExpression Id. */
-  int CLOSEBLOCK = 19;
+  int DIVIDE = 19;
   /** RegularExpression Id. */
-  int SUM = 20;
+  int ASSIGNMENT = 20;
   /** RegularExpression Id. */
-  int MINUS = 21;
+  int GREATER = 21;
   /** RegularExpression Id. */
-  int PLUS = 22;
+  int LESS = 22;
   /** RegularExpression Id. */
-  int DIVIDE = 23;
+  int GREATEREQUAL = 23;
   /** RegularExpression Id. */
-  int ASSIGNMENT = 24;
+  int LESSEQUAL = 24;
   /** RegularExpression Id. */
-  int GREATER = 25;
+  int DIFFERENCE = 25;
   /** RegularExpression Id. */
-  int LESS = 26;
+  int EQUAL = 26;
   /** RegularExpression Id. */
-  int GREATEREQUAL = 27;
+  int OPENBLOCK = 27;
   /** RegularExpression Id. */
-  int LESSEQUAL = 28;
+  int CLOSEBLOCK = 28;
   /** RegularExpression Id. */
-  int DIFFERENCE = 29;
+  int VARCHARDELIMITER = 29;
   /** RegularExpression Id. */
-  int EQUAL = 30;
+  int SEMICOLON = 30;
   /** RegularExpression Id. */
-  int ID = 31;
+  int COMMA = 31;
   /** RegularExpression Id. */
-  int LETTER = 32;
+  int DOUBLEPOINTS = 32;
   /** RegularExpression Id. */
-  int VARCHARDELIMITER = 33;
+  int LEFTPARENT = 33;
   /** RegularExpression Id. */
-  int SEMICOLON = 34;
+  int RIGHTPARENT = 34;
   /** RegularExpression Id. */
-  int COMMA = 35;
+  int HASHTAG = 35;
   /** RegularExpression Id. */
-  int DOUBLEPOINTS = 36;
+  int ID = 36;
   /** RegularExpression Id. */
-  int LEFTPARENT = 37;
+  int LETTER = 37;
   /** RegularExpression Id. */
-  int RIGHTPARENT = 38;
+  int NUMBER = 38;
   /** RegularExpression Id. */
-  int HASHTAG = 39;
+  int DIGIT = 39;
 
   /** Lexical state. */
   int DEFAULT = 0;
+  /** Lexical state. */
+  int multilinecomment = 1;
+  /** Lexical state. */
+  int singlelinecomment = 2;
 
   /** Literal token values. */
   String[] tokenImage = {
@@ -102,10 +106,6 @@ public interface FreshMeatConstants {
     "\"for\"",
     "\"to\"",
     "\"while\"",
-    "<NUMBER>",
-    "<DIGIT>",
-    "\"{\"",
-    "\"}\"",
     "\"+\"",
     "\"-\"",
     "\"*\"",
@@ -117,8 +117,8 @@ public interface FreshMeatConstants {
     "\"<=\"",
     "\"!=\"",
     "\"==\"",
-    "<ID>",
-    "<LETTER>",
+    "\"{\"",
+    "\"}\"",
     "\"\\\'\"",
     "\";\"",
     "\",\"",
@@ -126,6 +126,16 @@ public interface FreshMeatConstants {
     "\"(\"",
     "\")\"",
     "\"#\"",
+    "<ID>",
+    "<LETTER>",
+    "<NUMBER>",
+    "<DIGIT>",
+    "\"/*\"",
+    "\"*/\"",
+    "<token of kind 42>",
+    "\"//\"",
+    "<token of kind 44>",
+    "<token of kind 45>",
   };
 
 }

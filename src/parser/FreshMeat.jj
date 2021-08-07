@@ -134,33 +134,29 @@ TOKEN : /* Reserved words */
 | 	< FOR : "for">
 | 	< TO : "to">
 | 	< WHILE : "while" >
-|   < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
-| 	< #DIGIT : [ "0"-"9" ] >
-| 	< OPENBLOCK : "{" >
-| 	< CLOSEBLOCK : "}" >
 
 }
 
-TOKEN : /*OPERADORES*/
+TOKEN : /* Operadores */
 {
 	< SUM: "+" >
 |	< MINUS: "-" >
 |	< PLUS: "*" >
 |	< DIVIDE: "/" >	
-|	< ASSIGNMENT: "=">
+|	< ASSIGNMENT: "="> 
 |	< GREATER: ">" >
 |	< LESS: "<" >
 |	< GREATEREQUAL: ">=" >
 |	< LESSEQUAL: "<=" >
 |	< DIFFERENCE: "!=" >
-|	< EQUAL: "==" >
-	
+|	< EQUAL: "==" >	
+
 }
 
-TOKEN :
+TOKEN: /* Simbolos especiais */
 {
- 	< ID  : < LETTER > (< LETTER > | < DIGIT >)* >
-| 	< LETTER : ["A"-"Z" ] | ["a"-"z"] >
+	< OPENBLOCK : "{" >
+| 	< CLOSEBLOCK : "}" >
 | 	< VARCHARDELIMITER : "'" >
 | 	< SEMICOLON : ";" >
 | 	< COMMA : "," >
@@ -169,6 +165,37 @@ TOKEN :
 | 	< RIGHTPARENT : ")" >
 | 	< HASHTAG : "#" >
 
+}
+
+TOKEN :
+{
+ 	< ID  : < LETTER > (< LETTER > | < DIGIT >)* >
+| 	< LETTER : ["A"-"Z" ] | ["a"-"z"] >
+|   < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+| 	< #DIGIT : [ "0"-"9" ] >
+
+}
+
+SKIP:
+{
+	"/*": multilinecomment
+}
+
+< multilinecomment > SKIP:
+{
+  	"*/": DEFAULT
+| 	< ~ [] >
+}
+
+SKIP:
+{
+	"//": singlelinecomment
+}
+
+< singlelinecomment > SKIP:
+{ 
+  	< ["\n", "\r"] >: DEFAULT
+| 	< ~ [] >
 }
 
 SimpleNode start() :{/*@bgen(jjtree) start */
