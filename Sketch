@@ -47,7 +47,13 @@ LETRA ::= [A-Z][a-z]
 
 Start: script
 {
-	numero = 1; /* isso é um comentário */
+	numero = 1;
+	
+	if isfalse > istrue then
+	{		
+		nnumero = 1;
+	}
+
 }
 
 

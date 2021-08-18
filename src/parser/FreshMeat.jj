@@ -143,7 +143,7 @@ TOKEN : /* Operadores */
 |	< MINUS: "-" >
 |	< PLUS: "*" >
 |	< DIVIDE: "/" >	
-|	< ASSIGNMENT: "="> 
+|	< ASSIGN: "="> 
 |	< GREATER: ">" >
 |	< LESS: "<" >
 |	< GREATEREQUAL: ">=" >
@@ -155,14 +155,14 @@ TOKEN : /* Operadores */
 
 TOKEN: /* Simbolos especiais */
 {
-	< OPENBLOCK : "{" >
-| 	< CLOSEBLOCK : "}" >
+	< LBRACE : "{" >
+| 	< RBRACE : "}" >
 | 	< VARCHARDELIMITER : "'" >
 | 	< SEMICOLON : ";" >
 | 	< COMMA : "," >
 | 	< DOUBLEPOINTS : ":" >
-| 	< LEFTPARENT : "(" >
-| 	< RIGHTPARENT : ")" >
+| 	< LPARENT : "(" >
+| 	< RPARENT : ")" >
 | 	< HASHTAG : "#" >
 
 }
@@ -209,11 +209,11 @@ SimpleNode start() :{/*@bgen(jjtree) start */
 	(UsingDeclaration())*
 	  
 	<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
-	<OPENBLOCK>
+	<LBRACE>
 	
 		(Block())+
 	
-	<CLOSEBLOCK>/*@bgen(jjtree)*/
+	<RBRACE>/*@bgen(jjtree)*/
 {
   jjtree.closeNodeScope(jjtn000, true);
   jjtc000 = false;
@@ -286,12 +286,9 @@ void Command(): {/*@bgen(jjtree) Command */
 /*@egen*/
 	VariableAssignment()
 
-	//Variable() < ASSIGNMENT > MathExpression() < SEMICOLON >
+	//Variable() < ASSIGN > MathExpression() < SEMICOLON >
 
-	// deixei assim pra visualizar os pulos pela procura de token do lookahead
-| 	LOOKAHEAD(2)<IF> LogicExpression() <THEN>
-				(<OPENBLOCK>	Command()	<CLOSEBLOCK> )
-				(<ELSE>		<OPENBLOCK>		Command()	<CLOSEBLOCK> )? 
+| 	If()
  
 | 	ForTo()
 
@@ -350,6 +347,8 @@ void VariableAssignment(): {/*@bgen(jjtree) VariableAssignment */
 /*@egen*/
 }
 
+// | MathAssign()
+
 void VariableInicialization(): {/*@bgen(jjtree) VariableInicialization */
   SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEINICIALIZATION);
   boolean jjtc000 = true;
@@ -358,13 +357,77 @@ void VariableInicialization(): {/*@bgen(jjtree) VariableInicialization */
 {/*@bgen(jjtree) VariableInicialization */
         try {
 /*@egen*/
-  	<ASSIGNMENT> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)/*@bgen(jjtree)*/
+  	<ASSIGN> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
           }
         }
 /*@egen*/
+}
+
+void MathAssign(): {/*@bgen(jjtree) MathAssign */
+  SimpleNode jjtn000 = new SimpleNode(JJTMATHASSIGN);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) MathAssign */
+        try {
+/*@egen*/
+  	<ASSIGN> MathExpression()/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void If(): {/*@bgen(jjtree) If */
+  SimpleNode jjtn000 = new SimpleNode(JJTIF);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) If */
+        try {
+/*@egen*/
+	<IF> LogicExpression() <THEN>
+			(<LBRACE>	Command()	<RBRACE> )
+			(<ELSE>		<LBRACE>		Command()	<RBRACE> )?/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/ 
 }
 
 void ForTo(): {/*@bgen(jjtree) ForTo */
@@ -376,9 +439,9 @@ void ForTo(): {/*@bgen(jjtree) ForTo */
         try {
 /*@egen*/
 	<FOR> VariableAssignment() <TO> ExpressionArguments()
- 	(<OPENBLOCK>
+ 	(<LBRACE>
  		Command()
- 	<CLOSEBLOCK> )/*@bgen(jjtree)*/
+ 	<RBRACE> )/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -410,9 +473,9 @@ void While(): {/*@bgen(jjtree) While */
         try {
 /*@egen*/
 	<WHILE> LogicExpression()
- 	(<OPENBLOCK>
+ 	(<LBRACE>
  		Command()
- 	<CLOSEBLOCK> )/*@bgen(jjtree)*/
+ 	<RBRACE> )/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);

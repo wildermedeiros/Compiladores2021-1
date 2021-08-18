@@ -139,7 +139,7 @@ TOKEN : /* Operadores */
 |	< MINUS: "-" >
 |	< PLUS: "*" >
 |	< DIVIDE: "/" >	
-|	< ASSIGNMENT: "="> 
+|	< ASSIGN: "="> 
 |	< GREATER: ">" >
 |	< LESS: "<" >
 |	< GREATEREQUAL: ">=" >
@@ -151,14 +151,14 @@ TOKEN : /* Operadores */
 
 TOKEN: /* Simbolos especiais */
 {
-	< OPENBLOCK : "{" >
-| 	< CLOSEBLOCK : "}" >
+	< LBRACE : "{" >
+| 	< RBRACE : "}" >
 | 	< VARCHARDELIMITER : "'" >
 | 	< SEMICOLON : ";" >
 | 	< COMMA : "," >
 | 	< DOUBLEPOINTS : ":" >
-| 	< LEFTPARENT : "(" >
-| 	< RIGHTPARENT : ")" >
+| 	< LPARENT : "(" >
+| 	< RPARENT : ")" >
 | 	< HASHTAG : "#" >
 
 }
@@ -199,11 +199,11 @@ SimpleNode start() :{}
 	(UsingDeclaration())*
 	  
 	<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
-	<OPENBLOCK>
+	<LBRACE>
 	
 		(Block())+
 	
-	<CLOSEBLOCK>
+	<RBRACE>
 	
 { return jjtThis; }
 }
@@ -219,12 +219,9 @@ void Command(): {}
 {
 	VariableAssignment()
 
-	//Variable() < ASSIGNMENT > MathExpression() < SEMICOLON >
+	//Variable() < ASSIGN > MathExpression() < SEMICOLON >
 
-	// deixei assim pra visualizar os pulos pela procura de token do lookahead
-| 	LOOKAHEAD(2)<IF> LogicExpression() <THEN>
-				(<OPENBLOCK>	Command()	<CLOSEBLOCK> )
-				(<ELSE>		<OPENBLOCK>		Command()	<CLOSEBLOCK> )? 
+| 	If()
  
 | 	ForTo()
 
@@ -237,25 +234,39 @@ void VariableAssignment(): {}
 	<ID> VariableInicialization() <SEMICOLON>
 }
 
+// | MathAssign()
+
 void VariableInicialization(): { }
 {
-  	<ASSIGNMENT> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)
+  	<ASSIGN> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)
+}
+
+void MathAssign(): { }
+{
+  	<ASSIGN> MathExpression()
+}
+
+void If(): { }
+{
+	<IF> LogicExpression() <THEN>
+			(<LBRACE>	Command()	<RBRACE> )
+			(<ELSE>		<LBRACE>		Command()	<RBRACE> )? 
 }
 
 void ForTo(): { }
 {
 	<FOR> VariableAssignment() <TO> ExpressionArguments()
- 	(<OPENBLOCK>
+ 	(<LBRACE>
  		Command()
- 	<CLOSEBLOCK> )
+ 	<RBRACE> )
 }
 
 void While(): { }
 {
 	<WHILE> LogicExpression()
- 	(<OPENBLOCK>
+ 	(<LBRACE>
  		Command()
- 	<CLOSEBLOCK> )
+ 	<RBRACE> )
 } 
 
 void LogicExpression(): {}

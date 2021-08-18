@@ -41,7 +41,7 @@ public interface FreshMeatConstants {
   /** RegularExpression Id. */
   int DIVIDE = 19;
   /** RegularExpression Id. */
-  int ASSIGNMENT = 20;
+  int ASSIGN = 20;
   /** RegularExpression Id. */
   int GREATER = 21;
   /** RegularExpression Id. */
@@ -55,9 +55,9 @@ public interface FreshMeatConstants {
   /** RegularExpression Id. */
   int EQUAL = 26;
   /** RegularExpression Id. */
-  int OPENBLOCK = 27;
+  int LBRACE = 27;
   /** RegularExpression Id. */
-  int CLOSEBLOCK = 28;
+  int RBRACE = 28;
   /** RegularExpression Id. */
   int VARCHARDELIMITER = 29;
   /** RegularExpression Id. */
@@ -67,9 +67,9 @@ public interface FreshMeatConstants {
   /** RegularExpression Id. */
   int DOUBLEPOINTS = 32;
   /** RegularExpression Id. */
-  int LEFTPARENT = 33;
+  int LPARENT = 33;
   /** RegularExpression Id. */
-  int RIGHTPARENT = 34;
+  int RPARENT = 34;
   /** RegularExpression Id. */
   int HASHTAG = 35;
   /** RegularExpression Id. */
