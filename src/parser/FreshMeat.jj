@@ -242,7 +242,7 @@ SimpleNode start() :{/*@bgen(jjtree) start */
         }
 /*@egen*/
 }
- 
+  
 void Block(): {/*@bgen(jjtree) Block */
   SimpleNode jjtn000 = new SimpleNode(JJTBLOCK);
   boolean jjtc000 = true;
@@ -668,22 +668,29 @@ void VariableDeclaration(): {/*@bgen(jjtree) VariableDeclaration */
 }
 
 void DataType(): {/*@bgen(jjtree) DataType */
-  SimpleNode jjtn000 = new SimpleNode(JJTDATATYPE);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                   SimpleNode jjtn000 = new SimpleNode(JJTDATATYPE);
+                   boolean jjtc000 = true;
+                   jjtree.openNodeScope(jjtn000);
+/*@egen*/ RecoverySet recoverySet = First.DataType;}
 {/*@bgen(jjtree) DataType */
-  try {
+        try {
 /*@egen*/
-  < INTEGERTYPE > | < STRINGTYPE > | < BOOLTYPE >/*@bgen(jjtree)*/
-  } finally {
-    if (jjtc000) {
-      jjtree.closeNodeScope(jjtn000, true);
-    }
-  }
+  	try
+  	{
+  		< INTEGERTYPE > | < STRINGTYPE > | < BOOLTYPE >
+	}
+	catch(ParseException e)
+	{
+		consumeUntil(recoverySet, e, "DataType");  
+	}/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
 /*@egen*/
 }
-
+ 
 void IDList(): {/*@bgen(jjtree) IDList */
   SimpleNode jjtn000 = new SimpleNode(JJTIDLIST);
   boolean jjtc000 = true;

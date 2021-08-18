@@ -689,29 +689,33 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 
   static final public void DataType() throws ParseException {
                   /*@bgen(jjtree) DataType */
-  SimpleNode jjtn000 = new SimpleNode(JJTDATATYPE);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+                   SimpleNode jjtn000 = new SimpleNode(JJTDATATYPE);
+                   boolean jjtc000 = true;
+                   jjtree.openNodeScope(jjtn000);RecoverySet recoverySet = First.DataType;
     try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case INTEGERTYPE:
-        jj_consume_token(INTEGERTYPE);
-        break;
-      case STRINGTYPE:
-        jj_consume_token(STRINGTYPE);
-        break;
-      case BOOLTYPE:
-        jj_consume_token(BOOLTYPE);
-        break;
-      default:
-        jj_la1[12] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+      try {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case INTEGERTYPE:
+          jj_consume_token(INTEGERTYPE);
+          break;
+        case STRINGTYPE:
+          jj_consume_token(STRINGTYPE);
+          break;
+        case BOOLTYPE:
+          jj_consume_token(BOOLTYPE);
+          break;
+        default:
+          jj_la1[12] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      } catch (ParseException e) {
+                consumeUntil(recoverySet, e, "DataType");
       }
     } finally {
-    if (jjtc000) {
-      jjtree.closeNodeScope(jjtn000, true);
-    }
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
     }
   }
 

@@ -10,7 +10,11 @@ using talnamespace;
 
 Start: script
 {
-	int numero = 'id', otnunero = 3, varisnumeros = 4;
+	int numero = 'id', otnunero = 3, varisnumeros = 4; // comentário
+	
+	/*
+	oto comentário 
+	*/
 	
 	numero = 1;
 	
@@ -48,12 +52,6 @@ LETRA ::= [A-Z][a-z]
 Start: script
 {
 	numero = 1;
-	
-	if isfalse > istrue then
-	{		
-		nnumero = 1;
-	}
-
 }
 
 

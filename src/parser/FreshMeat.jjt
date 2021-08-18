@@ -207,7 +207,7 @@ SimpleNode start() :{}
 	
 { return jjtThis; }
 }
- 
+  
 void Block(): {}
 {
   	(VariableDeclaration())*
@@ -312,11 +312,18 @@ void VariableDeclaration(): {}
   (DataType() (IDList())+ <SEMICOLON>)
 }
 
-void DataType(): {}
+void DataType(): { RecoverySet recoverySet = First.DataType;}
 {
-  < INTEGERTYPE > | < STRINGTYPE > | < BOOLTYPE >
+  	try
+  	{
+  		< INTEGERTYPE > | < STRINGTYPE > | < BOOLTYPE >
+	}
+	catch(ParseException e)
+	{
+		consumeUntil(recoverySet, e, "DataType");  
+	}
 }
-
+ 
 void IDList(): { }
 {
 	 <ID> (VariableInicialization())? | <COMMA> <ID> (VariableInicialization())? 
