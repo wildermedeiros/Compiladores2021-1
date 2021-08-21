@@ -8,19 +8,18 @@ public interface FreshMeatTreeConstants
   public int JJTCOMMAND = 2;
   public int JJTVARIABLEASSIGNMENT = 3;
   public int JJTVARIABLEINICIALIZATION = 4;
-  public int JJTMATHASSIGN = 5;
-  public int JJTIF = 6;
-  public int JJTFORTO = 7;
-  public int JJTWHILE = 8;
-  public int JJTLOGICEXPRESSION = 9;
-  public int JJTMATHEXPRESSION = 10;
-  public int JJTEXPRESSIONARGUMENTS = 11;
-  public int JJTMATHOPERATOR = 12;
-  public int JJTLOGICOPERATOR = 13;
-  public int JJTUSINGDECLARATION = 14;
-  public int JJTVARIABLEDECLARATION = 15;
-  public int JJTDATATYPE = 16;
-  public int JJTIDLIST = 17;
+  public int JJTIF = 5;
+  public int JJTFORTO = 6;
+  public int JJTWHILE = 7;
+  public int JJTLOGICEXPRESSION = 8;
+  public int JJTMATHEXPRESSION = 9;
+  public int JJTEXPRESSIONARGUMENTS = 10;
+  public int JJTMATHOPERATOR = 11;
+  public int JJTLOGICOPERATOR = 12;
+  public int JJTUSINGDECLARATION = 13;
+  public int JJTVARIABLEDECLARATION = 14;
+  public int JJTDATATYPE = 15;
+  public int JJTIDLIST = 16;
 
 
   public String[] jjtNodeName = {
@@ -29,7 +28,6 @@ public interface FreshMeatTreeConstants
     "Command",
     "VariableAssignment",
     "VariableInicialization",
-    "MathAssign",
     "If",
     "ForTo",
     "While",
@@ -44,4 +42,4 @@ public interface FreshMeatTreeConstants
     "IDList",
   };
 }
-/* JavaCC - OriginalChecksum=260ed07d4242098fc58491f45b53f1f4 (do not edit this line) */
+/* JavaCC - OriginalChecksum=c6311dac7bab299ec7300e4b707fcf9b (do not edit this line) */

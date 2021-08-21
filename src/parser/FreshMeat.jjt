@@ -241,10 +241,10 @@ void VariableInicialization(): { }
   	<ASSIGN> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)
 }
 
-void MathAssign(): { }
-{
-  	<ASSIGN> MathExpression()
-}
+//void MathAssign(): { }
+//{
+//  	<ASSIGN> < ADD > MathExpression()
+//}
 
 void If(): { }
 {
@@ -292,7 +292,7 @@ void MathOperator(): { }
 	|	< DIVIDE >	
 }
 
-void LogicOperator(): { }
+void LogicOperator(): { RecoverySet recoverySet = First.LogicOperator; }
 {
   		< GREATER >
 	|	< LESS>
@@ -300,16 +300,60 @@ void LogicOperator(): { }
 	|	< LESSEQUAL>
 	|	< DIFFERENCE>
 	|	< EQUAL>
+
+		try
+  	{
+  		(<USING> <ID> <SEMICOLON>)
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "UsingDeclaration");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}
 }
 
-void UsingDeclaration(): {}
+void UsingDeclaration(): { RecoverySet recoverySet = First.UsingDeclaration; }
 {
-  (<USING> <ID> <SEMICOLON>)
+	try
+  	{
+  		(<USING> <ID> <SEMICOLON>)
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "UsingDeclaration");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}
 }
 
-void VariableDeclaration(): {}
+void VariableDeclaration(): { RecoverySet recoverySet = First.VariableDeclaration; }
 {
-  (DataType() (IDList())+ <SEMICOLON>)
+  	try
+  	{
+  		(DataType() (IDList())+ <SEMICOLON>)
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "VariableDeclaration");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}
 }
 
 void DataType(): { RecoverySet recoverySet = First.DataType;}
@@ -320,13 +364,34 @@ void DataType(): { RecoverySet recoverySet = First.DataType;}
 	}
 	catch(ParseException e)
 	{
-		consumeUntil(recoverySet, e, "DataType");  
+	  	try
+	  	{
+	    	consumeUntil(recoverySet, e, "DataType");  
+	  	}
+	  	catch(ParseEOFException eof)
+	  	{
+
+	  	}  
 	}
 }
- 
-void IDList(): { }
+  
+void IDList(): { RecoverySet recoverySet = First.IDList; }
 {
-	 <ID> (VariableInicialization())? | <COMMA> <ID> (VariableInicialization())? 
+	try
+  	{
+		<ID> (VariableInicialization())? | <COMMA> <ID> (VariableInicialization())?
+	}
+	catch(ParseException e)
+	{
+	  	try
+	  	{
+	    	consumeUntil(recoverySet, e, "IDList");  
+	  	}
+	  	catch(ParseEOFException eof)
+	  	{
+
+	  	}  
+	}
 }
  
 //void Semicolon(): { }

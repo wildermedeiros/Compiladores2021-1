@@ -307,35 +307,10 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     }
   }
 
-  static final public void MathAssign() throws ParseException {
-                    /*@bgen(jjtree) MathAssign */
-  SimpleNode jjtn000 = new SimpleNode(JJTMATHASSIGN);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      jj_consume_token(ASSIGN);
-      MathExpression();
-    } catch (Throwable jjte000) {
-          if (jjtc000) {
-            jjtree.clearNodeScope(jjtn000);
-            jjtc000 = false;
-          } else {
-            jjtree.popNode();
-          }
-          if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
-          }
-          if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
-          }
-          {if (true) throw (Error)jjte000;}
-    } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
-    }
-  }
-
+//void MathAssign(): { }
+//{
+//  	<ASSIGN> < ADD > MathExpression()
+//}
   static final public void If() throws ParseException {
             /*@bgen(jjtree) If */
   SimpleNode jjtn000 = new SimpleNode(JJTIF);
@@ -594,9 +569,9 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 
   static final public void LogicOperator() throws ParseException {
                        /*@bgen(jjtree) LogicOperator */
-  SimpleNode jjtn000 = new SimpleNode(JJTLOGICOPERATOR);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+                        SimpleNode jjtn000 = new SimpleNode(JJTLOGICOPERATOR);
+                        boolean jjtc000 = true;
+                        jjtree.openNodeScope(jjtn000);RecoverySet recoverySet = First.LogicOperator;
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case GREATER:
@@ -616,6 +591,20 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
         break;
       case EQUAL:
         jj_consume_token(EQUAL);
+        try {
+          jj_consume_token(USING);
+          jj_consume_token(ID);
+          jj_consume_token(SEMICOLON);
+        } catch (ParseException e) {
+                try
+                {
+                        consumeUntil(recoverySet, e, "UsingDeclaration");
+                }
+                catch(ParseEOFException eof)
+                {
+
+                }
+        }
         break;
       default:
         jj_la1[10] = jj_gen;
@@ -631,59 +620,81 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 
   static final public void UsingDeclaration() throws ParseException {
                           /*@bgen(jjtree) UsingDeclaration */
-  SimpleNode jjtn000 = new SimpleNode(JJTUSINGDECLARATION);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+                           SimpleNode jjtn000 = new SimpleNode(JJTUSINGDECLARATION);
+                           boolean jjtc000 = true;
+                           jjtree.openNodeScope(jjtn000);RecoverySet recoverySet = First.UsingDeclaration;
     try {
-      jj_consume_token(USING);
-      jj_consume_token(ID);
-      jj_consume_token(SEMICOLON);
+      try {
+        jj_consume_token(USING);
+        jj_consume_token(ID);
+        jj_consume_token(SEMICOLON);
+      } catch (ParseException e) {
+                try
+                {
+                        consumeUntil(recoverySet, e, "UsingDeclaration");
+                }
+                catch(ParseEOFException eof)
+                {
+
+                }
+      }
     } finally {
-    if (jjtc000) {
-      jjtree.closeNodeScope(jjtn000, true);
-    }
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
     }
   }
 
   static final public void VariableDeclaration() throws ParseException {
                              /*@bgen(jjtree) VariableDeclaration */
-  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEDECLARATION);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+                              SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEDECLARATION);
+                              boolean jjtc000 = true;
+                              jjtree.openNodeScope(jjtn000);RecoverySet recoverySet = First.VariableDeclaration;
     try {
-      DataType();
-      label_6:
-      while (true) {
-        IDList();
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case COMMA:
-        case ID:
-          ;
-          break;
-        default:
-          jj_la1[11] = jj_gen;
-          break label_6;
+      try {
+        DataType();
+        label_6:
+        while (true) {
+          IDList();
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case COMMA:
+          case ID:
+            ;
+            break;
+          default:
+            jj_la1[11] = jj_gen;
+            break label_6;
+          }
         }
+        jj_consume_token(SEMICOLON);
+      } catch (ParseException e) {
+                try
+                {
+                        consumeUntil(recoverySet, e, "VariableDeclaration");
+                }
+                catch(ParseEOFException eof)
+                {
+
+                }
       }
-      jj_consume_token(SEMICOLON);
     } catch (Throwable jjte000) {
-    if (jjtc000) {
-      jjtree.clearNodeScope(jjtn000);
-      jjtc000 = false;
-    } else {
-      jjtree.popNode();
-    }
-    if (jjte000 instanceof RuntimeException) {
-      {if (true) throw (RuntimeException)jjte000;}
-    }
-    if (jjte000 instanceof ParseException) {
-      {if (true) throw (ParseException)jjte000;}
-    }
-    {if (true) throw (Error)jjte000;}
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
     } finally {
-    if (jjtc000) {
-      jjtree.closeNodeScope(jjtn000, true);
-    }
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
     }
   }
 
@@ -710,7 +721,14 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           throw new ParseException();
         }
       } catch (ParseException e) {
+                try
+                {
                 consumeUntil(recoverySet, e, "DataType");
+                }
+                catch(ParseEOFException eof)
+                {
+
+                }
       }
     } finally {
           if (jjtc000) {
@@ -721,57 +739,68 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 
   static final public void IDList() throws ParseException {
                 /*@bgen(jjtree) IDList */
-  SimpleNode jjtn000 = new SimpleNode(JJTIDLIST);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+                 SimpleNode jjtn000 = new SimpleNode(JJTIDLIST);
+                 boolean jjtc000 = true;
+                 jjtree.openNodeScope(jjtn000);RecoverySet recoverySet = First.IDList;
     try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case ID:
-        jj_consume_token(ID);
+      try {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case ASSIGN:
-          VariableInicialization();
+        case ID:
+          jj_consume_token(ID);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case ASSIGN:
+            VariableInicialization();
+            break;
+          default:
+            jj_la1[13] = jj_gen;
+            ;
+          }
+          break;
+        case COMMA:
+          jj_consume_token(COMMA);
+          jj_consume_token(ID);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case ASSIGN:
+            VariableInicialization();
+            break;
+          default:
+            jj_la1[14] = jj_gen;
+            ;
+          }
           break;
         default:
-          jj_la1[13] = jj_gen;
-          ;
+          jj_la1[15] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
         }
-        break;
-      case COMMA:
-        jj_consume_token(COMMA);
-        jj_consume_token(ID);
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case ASSIGN:
-          VariableInicialization();
-          break;
-        default:
-          jj_la1[14] = jj_gen;
-          ;
-        }
-        break;
-      default:
-        jj_la1[15] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
+      } catch (ParseException e) {
+                try
+                {
+                consumeUntil(recoverySet, e, "IDList");
+                }
+                catch(ParseEOFException eof)
+                {
+
+                }
       }
     } catch (Throwable jjte000) {
-           if (jjtc000) {
-             jjtree.clearNodeScope(jjtn000);
-             jjtc000 = false;
-           } else {
-             jjtree.popNode();
-           }
-           if (jjte000 instanceof RuntimeException) {
-             {if (true) throw (RuntimeException)jjte000;}
-           }
-           if (jjte000 instanceof ParseException) {
-             {if (true) throw (ParseException)jjte000;}
-           }
-           {if (true) throw (Error)jjte000;}
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
     } finally {
-           if (jjtc000) {
-             jjtree.closeNodeScope(jjtn000, true);
-           }
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
     }
   }
 

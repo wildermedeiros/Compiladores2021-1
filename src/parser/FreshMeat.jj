@@ -366,36 +366,10 @@ void VariableInicialization(): {/*@bgen(jjtree) VariableInicialization */
 /*@egen*/
 }
 
-void MathAssign(): {/*@bgen(jjtree) MathAssign */
-  SimpleNode jjtn000 = new SimpleNode(JJTMATHASSIGN);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/ }
-{/*@bgen(jjtree) MathAssign */
-        try {
-/*@egen*/
-  	<ASSIGN> MathExpression()/*@bgen(jjtree)*/
-        } catch (Throwable jjte000) {
-          if (jjtc000) {
-            jjtree.clearNodeScope(jjtn000);
-            jjtc000 = false;
-          } else {
-            jjtree.popNode();
-          }
-          if (jjte000 instanceof RuntimeException) {
-            throw (RuntimeException)jjte000;
-          }
-          if (jjte000 instanceof ParseException) {
-            throw (ParseException)jjte000;
-          }
-          throw (Error)jjte000;
-        } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
-        }
-/*@egen*/
-}
+//void MathAssign(): { }
+//{
+//  	<ASSIGN> < ADD > MathExpression()
+//}
 
 void If(): {/*@bgen(jjtree) If */
   SimpleNode jjtn000 = new SimpleNode(JJTIF);
@@ -598,10 +572,10 @@ void MathOperator(): {/*@bgen(jjtree) MathOperator */
 }
 
 void LogicOperator(): {/*@bgen(jjtree) LogicOperator */
-  SimpleNode jjtn000 = new SimpleNode(JJTLOGICOPERATOR);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/ }
+                        SimpleNode jjtn000 = new SimpleNode(JJTLOGICOPERATOR);
+                        boolean jjtc000 = true;
+                        jjtree.openNodeScope(jjtn000);
+/*@egen*/ RecoverySet recoverySet = First.LogicOperator; }
 {/*@bgen(jjtree) LogicOperator */
                 try {
 /*@egen*/
@@ -610,7 +584,23 @@ void LogicOperator(): {/*@bgen(jjtree) LogicOperator */
 	|	< GREATEREQUAL>
 	|	< LESSEQUAL>
 	|	< DIFFERENCE>
-	|	< EQUAL>/*@bgen(jjtree)*/
+	|	< EQUAL>
+
+		try
+  	{
+  		(<USING> <ID> <SEMICOLON>)
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "UsingDeclaration");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}/*@bgen(jjtree)*/
                 } finally {
                   if (jjtc000) {
                     jjtree.closeNodeScope(jjtn000, true);
@@ -620,50 +610,78 @@ void LogicOperator(): {/*@bgen(jjtree) LogicOperator */
 }
 
 void UsingDeclaration(): {/*@bgen(jjtree) UsingDeclaration */
-  SimpleNode jjtn000 = new SimpleNode(JJTUSINGDECLARATION);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                           SimpleNode jjtn000 = new SimpleNode(JJTUSINGDECLARATION);
+                           boolean jjtc000 = true;
+                           jjtree.openNodeScope(jjtn000);
+/*@egen*/ RecoverySet recoverySet = First.UsingDeclaration; }
 {/*@bgen(jjtree) UsingDeclaration */
-  try {
+        try {
 /*@egen*/
-  (<USING> <ID> <SEMICOLON>)/*@bgen(jjtree)*/
-  } finally {
-    if (jjtc000) {
-      jjtree.closeNodeScope(jjtn000, true);
-    }
-  }
+	try
+  	{
+  		(<USING> <ID> <SEMICOLON>)
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "UsingDeclaration");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
 /*@egen*/
 }
 
 void VariableDeclaration(): {/*@bgen(jjtree) VariableDeclaration */
-  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEDECLARATION);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                              SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEDECLARATION);
+                              boolean jjtc000 = true;
+                              jjtree.openNodeScope(jjtn000);
+/*@egen*/ RecoverySet recoverySet = First.VariableDeclaration; }
 {/*@bgen(jjtree) VariableDeclaration */
-  try {
+        try {
 /*@egen*/
-  (DataType() (IDList())+ <SEMICOLON>)/*@bgen(jjtree)*/
-  } catch (Throwable jjte000) {
-    if (jjtc000) {
-      jjtree.clearNodeScope(jjtn000);
-      jjtc000 = false;
-    } else {
-      jjtree.popNode();
-    }
-    if (jjte000 instanceof RuntimeException) {
-      throw (RuntimeException)jjte000;
-    }
-    if (jjte000 instanceof ParseException) {
-      throw (ParseException)jjte000;
-    }
-    throw (Error)jjte000;
-  } finally {
-    if (jjtc000) {
-      jjtree.closeNodeScope(jjtn000, true);
-    }
-  }
+  	try
+  	{
+  		(DataType() (IDList())+ <SEMICOLON>)
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "VariableDeclaration");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
 /*@egen*/
 }
 
@@ -681,7 +699,14 @@ void DataType(): {/*@bgen(jjtree) DataType */
 	}
 	catch(ParseException e)
 	{
-		consumeUntil(recoverySet, e, "DataType");  
+	  	try
+	  	{
+	    	consumeUntil(recoverySet, e, "DataType");  
+	  	}
+	  	catch(ParseEOFException eof)
+	  	{
+
+	  	}  
 	}/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
@@ -690,36 +715,50 @@ void DataType(): {/*@bgen(jjtree) DataType */
         }
 /*@egen*/
 }
- 
+  
 void IDList(): {/*@bgen(jjtree) IDList */
-  SimpleNode jjtn000 = new SimpleNode(JJTIDLIST);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/ }
+                 SimpleNode jjtn000 = new SimpleNode(JJTIDLIST);
+                 boolean jjtc000 = true;
+                 jjtree.openNodeScope(jjtn000);
+/*@egen*/ RecoverySet recoverySet = First.IDList; }
 {/*@bgen(jjtree) IDList */
-         try {
+        try {
 /*@egen*/
-	 <ID> (VariableInicialization())? | <COMMA> <ID> (VariableInicialization())?/*@bgen(jjtree)*/
-         } catch (Throwable jjte000) {
-           if (jjtc000) {
-             jjtree.clearNodeScope(jjtn000);
-             jjtc000 = false;
-           } else {
-             jjtree.popNode();
-           }
-           if (jjte000 instanceof RuntimeException) {
-             throw (RuntimeException)jjte000;
-           }
-           if (jjte000 instanceof ParseException) {
-             throw (ParseException)jjte000;
-           }
-           throw (Error)jjte000;
-         } finally {
-           if (jjtc000) {
-             jjtree.closeNodeScope(jjtn000, true);
-           }
-         }
-/*@egen*/ 
+	try
+  	{
+		<ID> (VariableInicialization())? | <COMMA> <ID> (VariableInicialization())?
+	}
+	catch(ParseException e)
+	{
+	  	try
+	  	{
+	    	consumeUntil(recoverySet, e, "IDList");  
+	  	}
+	  	catch(ParseEOFException eof)
+	  	{
+
+	  	}  
+	}/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
 }
  
 //void Semicolon(): { }

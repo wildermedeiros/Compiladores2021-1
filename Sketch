@@ -51,6 +51,8 @@ LETRA ::= [A-Z][a-z]
 
 Start: script
 {
+	int otonumero = = = = = = = = 1, tal = 2;
+
 	numero = 1;
 }
 
