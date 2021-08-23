@@ -4,6 +4,7 @@
 options
 {
   static = true;
+  DEBUG_PARSER = true;
 }
 
 PARSER_BEGIN(FreshMeat)
@@ -79,7 +80,7 @@ public class FreshMeat
       	try
       	{
       		SimpleNode simpleNode = FreshMeat.start();
-      		simpleNode.dump(""); 				
+      		//simpleNode.dump(""); 				
       	}
       	catch (ParseException e)
       	{
@@ -327,7 +328,7 @@ void Command(): { RecoverySet recoverySet = First.Command; }
   		}
   		catch(ParseEOFException eof)
   		{
-    
+     
   		}  
 	}
 }

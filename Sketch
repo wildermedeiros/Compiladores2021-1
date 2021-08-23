@@ -17,7 +17,7 @@ Start: script
 	*/
 	
 	numero = 1;
-	
+	 
 	if isfalse > istrue then
 	{		
 		nnumero = 1;

@@ -5,6 +5,7 @@
 options
 {
   static = true;
+  DEBUG_PARSER = true;
 }
 
 PARSER_BEGIN(FreshMeat)
@@ -83,7 +84,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants/*@egen*
       	try
       	{
       		SimpleNode simpleNode = FreshMeat.start();
-      		simpleNode.dump(""); 				
+      		//simpleNode.dump(""); 				
       	}
       	catch (ParseException e)
       	{
@@ -389,7 +390,7 @@ void Command(): {/*@bgen(jjtree) Command */
   		}
   		catch(ParseEOFException eof)
   		{
-    
+     
   		}  
 	}/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
