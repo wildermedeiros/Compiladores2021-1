@@ -422,7 +422,7 @@ void VariableAssignment(): {/*@bgen(jjtree) VariableAssignment */
 {/*@bgen(jjtree) VariableAssignment */
         try {
 /*@egen*/
-	<ID> VariableInicialization() <SEMICOLON>/*@bgen(jjtree)*/
+	<ID> VariableInit() <SEMICOLON>/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -445,17 +445,29 @@ void VariableAssignment(): {/*@bgen(jjtree) VariableAssignment */
 /*@egen*/
 }
 
-// | MathAssign()
-
-void VariableInicialization(): {/*@bgen(jjtree) VariableInicialization */
-  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEINICIALIZATION);
+void VariableInit(): {/*@bgen(jjtree) VariableInit */
+  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEINIT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
 /*@egen*/ }
-{/*@bgen(jjtree) VariableInicialization */
+{/*@bgen(jjtree) VariableInit */
         try {
 /*@egen*/
-  	<ASSIGN> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)/*@bgen(jjtree)*/
+  	<ASSIGN> Y()/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -464,10 +476,84 @@ void VariableInicialization(): {/*@bgen(jjtree) VariableInicialization */
 /*@egen*/
 }
 
-//void MathAssign(): { }
-//{
-//  	<ASSIGN> < ADD > MathExpression()
-//}
+void Y(): {/*@bgen(jjtree) Y */
+  SimpleNode jjtn000 = new SimpleNode(JJTY);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) Y */
+        try {
+/*@egen*/
+  	( (<NUMBER> | <ID>) (DoMath())* ) | W()/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void W(): {/*@bgen(jjtree) W */
+  SimpleNode jjtn000 = new SimpleNode(JJTW);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) W */
+         try {
+/*@egen*/
+  	 (<VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)/*@bgen(jjtree)*/
+         } finally {
+           if (jjtc000) {
+             jjtree.closeNodeScope(jjtn000, true);
+           }
+         }
+/*@egen*/ 
+}
+
+void DoMath(): {/*@bgen(jjtree) DoMath */
+  SimpleNode jjtn000 = new SimpleNode(JJTDOMATH);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) DoMath */
+         try {
+/*@egen*/
+	 (MathOperator() ExpressionArguments())/*@bgen(jjtree)*/
+         } catch (Throwable jjte000) {
+           if (jjtc000) {
+             jjtree.clearNodeScope(jjtn000);
+             jjtc000 = false;
+           } else {
+             jjtree.popNode();
+           }
+           if (jjte000 instanceof RuntimeException) {
+             throw (RuntimeException)jjte000;
+           }
+           if (jjte000 instanceof ParseException) {
+             throw (ParseException)jjte000;
+           }
+           throw (Error)jjte000;
+         } finally {
+           if (jjtc000) {
+             jjtree.closeNodeScope(jjtn000, true);
+           }
+         }
+/*@egen*/
+}
 
 void If(): {/*@bgen(jjtree) If */
              SimpleNode jjtn000 = new SimpleNode(JJTIF);
@@ -923,7 +1009,7 @@ void IDList(): {/*@bgen(jjtree) IDList */
 /*@egen*/
 	try
   	{
-		<ID> (VariableInicialization())? | <COMMA> <ID> (VariableInicialization())?
+		<ID> (VariableInit())? | <COMMA> <ID> (VariableInit())?
 	}
 	catch(ParseException e)
 	{

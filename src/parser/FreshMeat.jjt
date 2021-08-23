@@ -334,20 +334,28 @@ void Command(): { RecoverySet recoverySet = First.Command; }
 
 void VariableAssignment(): {}
 {
-	<ID> VariableInicialization() <SEMICOLON>
+	<ID> VariableInit() <SEMICOLON>
 }
 
-// | MathAssign()
-
-void VariableInicialization(): { }
+void VariableInit(): { }
 {
-  	<ASSIGN> (<NUMBER> | <VARCHARDELIMITER> <ID> <VARCHARDELIMITER>)
+  	<ASSIGN> Y()
 }
 
-//void MathAssign(): { }
-//{
-//  	<ASSIGN> < ADD > MathExpression()
-//}
+void Y(): { }
+{
+  	( (<NUMBER> | <ID>) (DoMath())* ) | W()
+}
+
+void W(): { }
+{
+  	 (<VARCHARDELIMITER> <ID> <VARCHARDELIMITER>) 
+}
+
+void DoMath(): { }
+{
+	 (MathOperator() ExpressionArguments())
+}
 
 void If(): { RecoverySet recoverySet = First.If; }
 {
@@ -581,7 +589,7 @@ void IDList(): { RecoverySet recoverySet = First.IDList; }
 {
 	try
   	{
-		<ID> (VariableInicialization())? | <COMMA> <ID> (VariableInicialization())?
+		<ID> (VariableInit())? | <COMMA> <ID> (VariableInit())?
 	}
 	catch(ParseException e)
 	{

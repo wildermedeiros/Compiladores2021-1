@@ -337,7 +337,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   jjtree.openNodeScope(jjtn000);
     try {
       jj_consume_token(ID);
-      VariableInicialization();
+      VariableInit();
       jj_consume_token(SEMICOLON);
     } catch (Throwable jjte000) {
           if (jjtc000) {
@@ -360,28 +360,28 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     }
   }
 
-// | MathAssign()
-  static final public void VariableInicialization() throws ParseException {
-                                /*@bgen(jjtree) VariableInicialization */
-  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEINICIALIZATION);
+  static final public void VariableInit() throws ParseException {
+                      /*@bgen(jjtree) VariableInit */
+  SimpleNode jjtn000 = new SimpleNode(JJTVARIABLEINIT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
       jj_consume_token(ASSIGN);
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case NUMBER:
-        jj_consume_token(NUMBER);
-        break;
-      case VARCHARDELIMITER:
-        jj_consume_token(VARCHARDELIMITER);
-        jj_consume_token(ID);
-        jj_consume_token(VARCHARDELIMITER);
-        break;
-      default:
-        jj_la1[4] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
+      Y();
+    } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -389,10 +389,117 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     }
   }
 
-//void MathAssign(): { }
-//{
-//  	<ASSIGN> < ADD > MathExpression()
-//}
+  static final public void Y() throws ParseException {
+           /*@bgen(jjtree) Y */
+  SimpleNode jjtn000 = new SimpleNode(JJTY);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case ID:
+      case NUMBER:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case NUMBER:
+          jj_consume_token(NUMBER);
+          break;
+        case ID:
+          jj_consume_token(ID);
+          break;
+        default:
+          jj_la1[4] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        label_4:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case SUM:
+          case MINUS:
+          case PLUS:
+          case DIVIDE:
+            ;
+            break;
+          default:
+            jj_la1[5] = jj_gen;
+            break label_4;
+          }
+          DoMath();
+        }
+        break;
+      case VARCHARDELIMITER:
+        W();
+        break;
+      default:
+        jj_la1[6] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void W() throws ParseException {
+           /*@bgen(jjtree) W */
+  SimpleNode jjtn000 = new SimpleNode(JJTW);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(VARCHARDELIMITER);
+      jj_consume_token(ID);
+      jj_consume_token(VARCHARDELIMITER);
+    } finally {
+           if (jjtc000) {
+             jjtree.closeNodeScope(jjtn000, true);
+           }
+    }
+  }
+
+  static final public void DoMath() throws ParseException {
+                /*@bgen(jjtree) DoMath */
+  SimpleNode jjtn000 = new SimpleNode(JJTDOMATH);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      MathOperator();
+      ExpressionArguments();
+    } catch (Throwable jjte000) {
+           if (jjtc000) {
+             jjtree.clearNodeScope(jjtn000);
+             jjtc000 = false;
+           } else {
+             jjtree.popNode();
+           }
+           if (jjte000 instanceof RuntimeException) {
+             {if (true) throw (RuntimeException)jjte000;}
+           }
+           if (jjte000 instanceof ParseException) {
+             {if (true) throw (ParseException)jjte000;}
+           }
+           {if (true) throw (Error)jjte000;}
+    } finally {
+           if (jjtc000) {
+             jjtree.closeNodeScope(jjtn000, true);
+           }
+    }
+  }
+
   static final public void If() throws ParseException {
             /*@bgen(jjtree) If */
              SimpleNode jjtn000 = new SimpleNode(JJTIF);
@@ -414,7 +521,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           jj_consume_token(RBRACE);
           break;
         default:
-          jj_la1[5] = jj_gen;
+          jj_la1[7] = jj_gen;
           ;
         }
       } catch (ParseException e) {
@@ -544,7 +651,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     try {
       try {
         ExpressionArguments();
-        label_4:
+        label_5:
         while (true) {
           LogicOperator();
           ExpressionArguments();
@@ -558,8 +665,8 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
             ;
             break;
           default:
-            jj_la1[6] = jj_gen;
-            break label_4;
+            jj_la1[8] = jj_gen;
+            break label_5;
           }
         }
       } catch (ParseException e) {
@@ -600,7 +707,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   jjtree.openNodeScope(jjtn000);
     try {
       ExpressionArguments();
-      label_5:
+      label_6:
       while (true) {
         MathOperator();
         ExpressionArguments();
@@ -612,8 +719,8 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           ;
           break;
         default:
-          jj_la1[7] = jj_gen;
-          break label_5;
+          jj_la1[9] = jj_gen;
+          break label_6;
         }
       }
     } catch (Throwable jjte000) {
@@ -652,7 +759,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           jj_consume_token(NUMBER);
           break;
         default:
-          jj_la1[8] = jj_gen;
+          jj_la1[10] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -694,7 +801,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           jj_consume_token(DIVIDE);
           break;
         default:
-          jj_la1[9] = jj_gen;
+          jj_la1[11] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -742,7 +849,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           jj_consume_token(EQUAL);
           break;
         default:
-          jj_la1[10] = jj_gen;
+          jj_la1[12] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -798,7 +905,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     try {
       try {
         DataType();
-        label_6:
+        label_7:
         while (true) {
           IDList();
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -807,8 +914,8 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
             ;
             break;
           default:
-            jj_la1[11] = jj_gen;
-            break label_6;
+            jj_la1[13] = jj_gen;
+            break label_7;
           }
         }
         jj_consume_token(SEMICOLON);
@@ -861,7 +968,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           jj_consume_token(BOOLTYPE);
           break;
         default:
-          jj_la1[12] = jj_gen;
+          jj_la1[14] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -894,10 +1001,10 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           jj_consume_token(ID);
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case ASSIGN:
-            VariableInicialization();
+            VariableInit();
             break;
           default:
-            jj_la1[13] = jj_gen;
+            jj_la1[15] = jj_gen;
             ;
           }
           break;
@@ -906,15 +1013,15 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           jj_consume_token(ID);
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case ASSIGN:
-            VariableInicialization();
+            VariableInit();
             break;
           default:
-            jj_la1[14] = jj_gen;
+            jj_la1[16] = jj_gen;
             ;
           }
           break;
         default:
-          jj_la1[15] = jj_gen;
+          jj_la1[17] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -959,7 +1066,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[16];
+  static final private int[] jj_la1 = new int[18];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -967,10 +1074,10 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x200,0xa5c0,0x1c0,0xa400,0x20000000,0x1000,0x7e00000,0xf0000,0x0,0xf0000,0x7e00000,0x80000000,0x1c0,0x100000,0x100000,0x80000000,};
+      jj_la1_0 = new int[] {0x200,0xa5c0,0x1c0,0xa400,0x0,0xf0000,0x20000000,0x1000,0x7e00000,0xf0000,0x0,0xf0000,0x7e00000,0x80000000,0x1c0,0x100000,0x100000,0x80000000,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x10,0x0,0x10,0x40,0x0,0x0,0x0,0x50,0x0,0x0,0x10,0x0,0x0,0x0,0x10,};
+      jj_la1_1 = new int[] {0x0,0x10,0x0,0x10,0x50,0x0,0x50,0x0,0x0,0x0,0x50,0x0,0x0,0x10,0x0,0x0,0x0,0x10,};
    }
 
   /** Constructor with InputStream. */
@@ -991,7 +1098,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1006,7 +1113,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -1023,7 +1130,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1034,7 +1141,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -1050,7 +1157,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1060,7 +1167,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 16; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -1116,7 +1223,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 18; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
