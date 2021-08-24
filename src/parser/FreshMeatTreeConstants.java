@@ -15,14 +15,13 @@ public interface FreshMeatTreeConstants
   public int JJTFORTO = 9;
   public int JJTWHILE = 10;
   public int JJTLOGICEXPRESSION = 11;
-  public int JJTMATHEXPRESSION = 12;
-  public int JJTEXPRESSIONARGUMENTS = 13;
-  public int JJTMATHOPERATOR = 14;
-  public int JJTLOGICOPERATOR = 15;
-  public int JJTUSINGDECLARATION = 16;
-  public int JJTVARIABLEDECLARATION = 17;
-  public int JJTDATATYPE = 18;
-  public int JJTIDLIST = 19;
+  public int JJTEXPRESSIONARGUMENTS = 12;
+  public int JJTMATHOPERATOR = 13;
+  public int JJTLOGICOPERATOR = 14;
+  public int JJTUSINGDECLARATION = 15;
+  public int JJTVARIABLEDECLARATION = 16;
+  public int JJTDATATYPE = 17;
+  public int JJTIDLIST = 18;
 
 
   public String[] jjtNodeName = {
@@ -38,7 +37,6 @@ public interface FreshMeatTreeConstants
     "ForTo",
     "While",
     "LogicExpression",
-    "MathExpression",
     "ExpressionArguments",
     "MathOperator",
     "LogicOperator",
@@ -48,4 +46,4 @@ public interface FreshMeatTreeConstants
     "IDList",
   };
 }
-/* JavaCC - OriginalChecksum=943f910a7b911164215e88d1203e84dd (do not edit this line) */
+/* JavaCC - OriginalChecksum=3531bed67797c6781563e788190052ef (do not edit this line) */

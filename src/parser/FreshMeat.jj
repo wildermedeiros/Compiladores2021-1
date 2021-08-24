@@ -84,7 +84,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants/*@egen*
       	try
       	{
       		SimpleNode simpleNode = FreshMeat.start();
-      		//simpleNode.dump(""); 				
+      		simpleNode.dump(""); 				
       	}
       	catch (ParseException e)
       	{
@@ -314,7 +314,7 @@ SimpleNode start() :{/*@bgen(jjtree) start */
 /*@egen*/
 
 }
-  
+   
 void Block(): {/*@bgen(jjtree) Block */
                 SimpleNode jjtn000 = new SimpleNode(JJTBLOCK);
                 boolean jjtc000 = true;
@@ -327,7 +327,7 @@ void Block(): {/*@bgen(jjtree) Block */
   	{
   		(VariableDeclaration())*
   	
-  		Command()
+  		Command() 
 	}
 	catch(ParseException e)
 	{
@@ -744,53 +744,27 @@ void LogicExpression(): {/*@bgen(jjtree) LogicExpression */
 /*@egen*/
 }
 
-void MathExpression() : {/*@bgen(jjtree) MathExpression */
-  SimpleNode jjtn000 = new SimpleNode(JJTMATHEXPRESSION);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/ /*RecoverySet recoverySet = First.MathExpression; */}
-{/*@bgen(jjtree) MathExpression */
-                try {
-/*@egen*/
-	/*try
-  	{*/
-		ExpressionArguments() (MathOperator() ExpressionArguments())+/*@bgen(jjtree)*/
-                } catch (Throwable jjte000) {
-                  if (jjtc000) {
-                    jjtree.clearNodeScope(jjtn000);
-                    jjtc000 = false;
-                  } else {
-                    jjtree.popNode();
-                  }
-                  if (jjte000 instanceof RuntimeException) {
-                    throw (RuntimeException)jjte000;
-                  }
-                  if (jjte000 instanceof ParseException) {
-                    throw (ParseException)jjte000;
-                  }
-                  throw (Error)jjte000;
-                } finally {
-                  if (jjtc000) {
-                    jjtree.closeNodeScope(jjtn000, true);
-                  }
-                }
-/*@egen*/
-	//}
-	/*
-	catch(ParseException e)
-	{
-  		try
-  		{		
-			consumeUntil(recoverySet, e, "MathExpression");  
-  		}
-  		catch(ParseEOFException eof)
-  		{
-    
-  		}  
-	}
-	*/
-	
-}
+//void MathExpression() : { /*RecoverySet recoverySet = First.MathExpression; */}
+//{
+//	/*try
+//  	{*/
+//		ExpressionArguments() (MathOperator() ExpressionArguments())+
+//	//}
+//	/*
+//	catch(ParseException e)
+//	{
+//  		try
+//  		{		
+//			consumeUntil(recoverySet, e, "MathExpression");  
+//  		}
+//  		catch(ParseEOFException eof)
+//  		{
+//    
+//  		}  
+//	}
+//	*/
+//	
+//}
 
 void ExpressionArguments(): {/*@bgen(jjtree) ExpressionArguments */
                               SimpleNode jjtn000 = new SimpleNode(JJTEXPRESSIONARGUMENTS);

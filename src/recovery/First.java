@@ -6,14 +6,14 @@ public class First
 { //implementa os conjuntos first p/ alguns n.terminais
 
     static public final RecoverySet start = new RecoverySet();
-    static public final RecoverySet UsingDeclaration = new RecoverySet();
     static public final RecoverySet Block = new RecoverySet();
     static public final RecoverySet Command = Block;
-    
-//    static public final RecoverySet VariableAssignment = new RecoverySet();
-//    static public final RecoverySet VariableInicialization = new RecoverySet();
-//    static public final RecoverySet MathAssign = new RecoverySet();
-    
+    static public final RecoverySet VariableAssignment = new RecoverySet().union(Command);
+    static public final RecoverySet IDList = new RecoverySet();
+    static public final RecoverySet VariableInit = new RecoverySet().union(IDList);
+    static public final RecoverySet Y = VariableInit;
+    static public final RecoverySet W = Y;
+    static public final RecoverySet DoMath = new RecoverySet().union(Y); 
     static public final RecoverySet If = Command;
     static public final RecoverySet ForTo = Command;
     static public final RecoverySet While = Command;
@@ -24,23 +24,31 @@ public class First
     static public final RecoverySet ExpressionArguments = new RecoverySet();
     static public final RecoverySet MathOperator = new RecoverySet();
     static public final RecoverySet LogicOperator = MathOperator;
+    static public final RecoverySet UsingDeclaration = new RecoverySet();
     static public final RecoverySet VariableDeclaration = new RecoverySet();
     static public final RecoverySet DataType = new RecoverySet();
-    static public final RecoverySet IDList = new RecoverySet();
 
 
     static 
     {
     	start.add(new Integer(FreshMeatConstants.EOF));
     	
-    	UsingDeclaration.add(new Integer(FreshMeatConstants.STARTSCRIPT));
-    	UsingDeclaration.add(new Integer(FreshMeatConstants.USING));
-    	
     	Block.add(new Integer(FreshMeatConstants.RBRACE));
     	Block.add(new Integer(FreshMeatConstants.INTEGERTYPE));
     	Block.add(new Integer(FreshMeatConstants.STRINGTYPE));
     	Block.add(new Integer(FreshMeatConstants.BOOLTYPE));
+    	Block.add(new Integer(FreshMeatConstants.ID));
     	
+    	VariableAssignment.add(new Integer(FreshMeatConstants.TO));
+
+    	VariableInit.add(new Integer(FreshMeatConstants.SEMICOLON));
+    	VariableInit.add(new Integer(FreshMeatConstants.ASSIGN));
+
+    	DoMath.add(new Integer(FreshMeatConstants.SUM));
+    	DoMath.add(new Integer(FreshMeatConstants.MINUS));
+    	DoMath.add(new Integer(FreshMeatConstants.PLUS));
+    	DoMath.add(new Integer(FreshMeatConstants.DIVIDE));   	
+
     	LogicExpression.add(new Integer(FreshMeatConstants.THEN)); 
     	LogicExpression.add(new Integer(FreshMeatConstants.LBRACE));    
     	
@@ -60,6 +68,9 @@ public class First
 
     	MathOperator.add(new Integer(FreshMeatConstants.ID));  
     	MathOperator.add(new Integer(FreshMeatConstants.NUMBER)); 
+    	
+    	UsingDeclaration.add(new Integer(FreshMeatConstants.STARTSCRIPT));
+    	UsingDeclaration.add(new Integer(FreshMeatConstants.USING));
     	
      	VariableDeclaration.add(new Integer(FreshMeatConstants.ID)); 
      	VariableDeclaration.add(new Integer(FreshMeatConstants.IF)); 

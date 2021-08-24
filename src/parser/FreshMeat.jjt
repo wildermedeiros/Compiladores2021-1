@@ -80,7 +80,7 @@ public class FreshMeat
       	try
       	{
       		SimpleNode simpleNode = FreshMeat.start();
-      		//simpleNode.dump(""); 				
+      		simpleNode.dump(""); 				
       	}
       	catch (ParseException e)
       	{
@@ -284,14 +284,14 @@ SimpleNode start() :{ RecoverySet recoverySet = First.start; }
 	}
 
 }
-  
+   
 void Block(): { RecoverySet recoverySet = First.Block; }
 {
   	try
   	{
   		(VariableDeclaration())*
   	
-  		Command()
+  		Command() 
 	}
 	catch(ParseException e)
 	{
@@ -442,27 +442,27 @@ void LogicExpression(): { RecoverySet recoverySet = First.LogicExpression; }
 	}
 }
 
-void MathExpression() : { /*RecoverySet recoverySet = First.MathExpression; */}
-{
-	/*try
-  	{*/
-		ExpressionArguments() (MathOperator() ExpressionArguments())+
-	//}
-	/*
-	catch(ParseException e)
-	{
-  		try
-  		{		
-			consumeUntil(recoverySet, e, "MathExpression");  
-  		}
-  		catch(ParseEOFException eof)
-  		{
-    
-  		}  
-	}
-	*/
-	
-}
+//void MathExpression() : { /*RecoverySet recoverySet = First.MathExpression; */}
+//{
+//	/*try
+//  	{*/
+//		ExpressionArguments() (MathOperator() ExpressionArguments())+
+//	//}
+//	/*
+//	catch(ParseException e)
+//	{
+//  		try
+//  		{		
+//			consumeUntil(recoverySet, e, "MathExpression");  
+//  		}
+//  		catch(ParseEOFException eof)
+//  		{
+//    
+//  		}  
+//	}
+//	*/
+//	
+//}
 
 void ExpressionArguments(): { RecoverySet recoverySet = First.ExpressionArguments; }
 {
