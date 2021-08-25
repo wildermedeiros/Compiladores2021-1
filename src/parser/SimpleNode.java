@@ -2,6 +2,8 @@
 /* JavaCCOptions:MULTI=false,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package parser;
 
+import view.Tela;
+
 public
 class SimpleNode implements Node {
 
@@ -10,6 +12,7 @@ class SimpleNode implements Node {
   protected int id;
   protected Object value;
   protected FreshMeat parser;
+  protected String msg = "";
 
   public SimpleNode(int i) {
     id = i;
@@ -65,6 +68,7 @@ class SimpleNode implements Node {
 
   public void dump(String prefix) {
     System.out.println(toString(prefix));
+    this.msg = this.msg + prefix;
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         SimpleNode n = (SimpleNode)children[i];
@@ -73,6 +77,10 @@ class SimpleNode implements Node {
         }
       }
     }
+  }
+  
+  public String getMsg() {
+	  return this.msg;
   }
 }
 

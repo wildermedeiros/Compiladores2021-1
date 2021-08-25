@@ -1,0 +1,10 @@
+Start: script
+{
+	int aqueleNumeroCabuloso = 4; // coment�rio
+	
+	
+	while isTrue > isFalse
+	{
+		aqueleNumeroCabuloso = 4;
+	}
+}
