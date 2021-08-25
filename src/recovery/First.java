@@ -9,7 +9,8 @@ public class First
     static public final RecoverySet Block = new RecoverySet();
     static public final RecoverySet Command = Block;
     static public final RecoverySet VariableAssignment = new RecoverySet().union(Command);
-    static public final RecoverySet IDList = new RecoverySet();
+    static public final RecoverySet DataType = new RecoverySet();
+    static public final RecoverySet IDList = new RecoverySet().union(DataType);
     static public final RecoverySet VariableInit = new RecoverySet().union(IDList);
     static public final RecoverySet Y = VariableInit;
     static public final RecoverySet W = Y;
@@ -18,15 +19,11 @@ public class First
     static public final RecoverySet ForTo = Command;
     static public final RecoverySet While = Command;
     static public final RecoverySet LogicExpression = new RecoverySet();
-    
-//    static public final RecoverySet MathExpression = new RecoverySet();
-
-    static public final RecoverySet ExpressionArguments = new RecoverySet();
+    static public final RecoverySet ExpressionArguments = new RecoverySet().union(DoMath).union(LogicExpression);
     static public final RecoverySet MathOperator = new RecoverySet();
     static public final RecoverySet LogicOperator = MathOperator;
     static public final RecoverySet UsingDeclaration = new RecoverySet();
     static public final RecoverySet VariableDeclaration = new RecoverySet();
-    static public final RecoverySet DataType = new RecoverySet();
 
 
     static 
@@ -59,13 +56,7 @@ public class First
     	ExpressionArguments.add(new Integer(FreshMeatConstants.LESSEQUAL));    	
     	ExpressionArguments.add(new Integer(FreshMeatConstants.DIFFERENCE));    	
     	ExpressionArguments.add(new Integer(FreshMeatConstants.EQUAL));    	
-    	ExpressionArguments.add(new Integer(FreshMeatConstants.THEN));   
-    	ExpressionArguments.add(new Integer(FreshMeatConstants.SUM));    	
-    	ExpressionArguments.add(new Integer(FreshMeatConstants.MINUS));    	
-    	ExpressionArguments.add(new Integer(FreshMeatConstants.PLUS));    	
-    	ExpressionArguments.add(new Integer(FreshMeatConstants.DIVIDE));    	
-    	//ExpressionArguments.add(new Integer(FreshMeatConstants.folow de math expression));    	
-
+    		
     	MathOperator.add(new Integer(FreshMeatConstants.ID));  
     	MathOperator.add(new Integer(FreshMeatConstants.NUMBER)); 
     	
@@ -84,8 +75,7 @@ public class First
      	DataType.add(new Integer(FreshMeatConstants.COMMA));
 
      	IDList.add(new Integer(FreshMeatConstants.SEMICOLON));
-     	IDList.add(new Integer(FreshMeatConstants.ID));
-     	IDList.add(new Integer(FreshMeatConstants.COMMA));
+
 
 
 

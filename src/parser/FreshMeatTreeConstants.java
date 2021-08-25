@@ -22,6 +22,23 @@ public interface FreshMeatTreeConstants
   public int JJTVARIABLEDECLARATION = 16;
   public int JJTDATATYPE = 17;
   public int JJTIDLIST = 18;
+  public int JJTSTARTSCRIPT = 19;
+  public int JJTDOUBLEPOINTS = 20;
+  public int JJTID = 21;
+  public int JJTLBRACE = 22;
+  public int JJTRBRACE = 23;
+  public int JJTSEMICOLON = 24;
+  public int JJTASSIGN = 25;
+  public int JJTNUMBER = 26;
+  public int JJTSTRINGDELIMIT = 27;
+  public int JJTTHEN = 28;
+  public int JJTELSE = 29;
+  public int JJTFOR = 30;
+  public int JJTTO = 31;
+  public int JJTSUM = 32;
+  public int JJTMINUS = 33;
+  public int JJTPLUS = 34;
+  public int JJTDIVIDE = 35;
 
 
   public String[] jjtNodeName = {
@@ -44,6 +61,23 @@ public interface FreshMeatTreeConstants
     "VariableDeclaration",
     "DataType",
     "IDList",
+    "StartScript",
+    "DoublePoints",
+    "Id",
+    "LBrace",
+    "RBrace",
+    "SemiColon",
+    "Assign",
+    "Number",
+    "StringDelimit",
+    "Then",
+    "Else",
+    "FOR",
+    "To",
+    "Sum",
+    "Minus",
+    "Plus",
+    "Divide",
   };
 }
-/* JavaCC - OriginalChecksum=3531bed67797c6781563e788190052ef (do not edit this line) */
+/* JavaCC - OriginalChecksum=7b011061824196489fb5cabbeac03073 (do not edit this line) */

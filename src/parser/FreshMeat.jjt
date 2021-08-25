@@ -4,158 +4,224 @@
 options
 {
   static = true;
-  DEBUG_PARSER = true;
+  //DEBUG_PARSER = true;
 }
 
 PARSER_BEGIN(FreshMeat)
-
+ 
 package parser;
+import view.Tela;
+import controleDeArquivos.CreateFile;
 import recovery.*;
 import java.io.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
 
 public class FreshMeat
 {
-	private static String myFile = "";
-	int contParseError = 0;	// contador de erros sintáticos
+  	final static Tela window = new Tela();
+  	static private String console = "";
+  
+  	//private static String myFile = "";
+    int contParseError = 0; // contador de erros sintáticos
 	
-	// funo para abertura de arquivo a ser usado como source para leitura de tokens
-	public static java.io.BufferedReader abreArquivo (String file)
-	{
-		java.io.BufferedReader in;
-		java.io.File arquivinho = new java.io.File(file);
-    	try
-    	{
-         	in= new java.io.BufferedReader(new java.io.FileReader(arquivinho));
-    	}
-    	catch(java.io.IOException e)
-    	{
-    		in = null;
-    		System.out.println("Arquivo não pode ser aberto.");
-    	}		
-		return (in);	
-	}
-	
-	public static void main(String args []) throws ParseException
+  	public static void main(String args []) throws ParseException
   	{
-    	FreshMeat parser;     // analisador léxico/sintático
+	    window.setVisible(true);
+	
+		window.getCompilar().addActionListener(new ActionListener()
+		{
+    		public void actionPerformed(ActionEvent e)
+    		{
+				window.setVazioConsoleMsg();
 
-		// Receba o arquivo aberto, leia uma linha 
-	 	try
-	 	{
-			//Verifica se ja nao ha arquivo escolhido
-	 		if (myFile.equals(""))
-	 		{
-	 			//Cria o Seletor de arquivos e seta o disco "C:" como default
-		 		javax.swing.JFileChooser arquivo = new javax.swing.JFileChooser();
-		 		
-		 		//Habilita para escolha  
-	            arquivo.showOpenDialog(null);
-	            
-				//Recebe o Path do arquivo
-	            myFile = arquivo.getSelectedFile().getAbsolutePath();
-		 	    
-				//Abre o arquivo no endereco escolhido
-	         	java.io.BufferedReader aux = abreArquivo(myFile);
-	            String str;  
-	            java.io.StringReader sr = new java.io.StringReader( aux.readLine());
-		        java.io.Reader r = new java.io.BufferedReader( sr );		
-	   	        parser = new FreshMeat( abreArquivo(myFile));
-		        java.io.BufferedReader in = aux;
-    	
-	            // enquanto houverem linhas, as leio;
-	            while ((str = in.readLine()) != null)
-	            {
-	            	sr = new java.io.StringReader( str);
-		        	r = new java.io.BufferedReader( sr );
+	            if((window.getTextArquivo().getText().equals(window.getCampoTexto())) != true)
+				{
+	  				window.setControleArquivo(false);
+				}
+				
+				if(window.getControleArquivo() || window.getTextArquivo().getText().equals(" ") )
+				{
+		            try
+		            {
+						RunAskella();
+					}
+					catch (ParseException e1)
+					{
+						e1.printStackTrace();
+					}
 	            }
-            	//Encerra o buffer  
-            	in.close();
-	 		}
-    	}
-    	catch (java.io.IOException e)
-    	{
-			javax.swing.JOptionPane.showMessageDialog(null,"Erro ao iniciar o Analisador Lexico!");
-        }
+	            else
+	            {
+	           		if(window.getTextArquivo().getText().equals(""))
+	        		{
+	            		JOptionPane.showMessageDialog (null, "Arquivo vazio", "Arquivo", JOptionPane.WARNING_MESSAGE);
+	        		}
+	        		else
+	        		{
+	          			int resp = JOptionPane.showConfirmDialog(null, "Salvar altera\u00e7\u00f5es?");
+	
+		          		if(resp == 0)
+		          		{
+				            //Salvar um novo arquivo se ele n existir
+				            if(window.getFile() == null)
+			            	{
+			                	window.salvarComo();
+		                        try
+		                        {
+									RunAskella();
+								}
+								catch (ParseException e1)
+								{
+									e1.printStackTrace();
+								}
+			
+			            		}
+		            		else //Se o arquivo ja existir salvar nele
+		            		{
+			                	window.salvar();
+	                            try
+	                            {
+									RunAskella();
+								}
+								catch (ParseException e1)
+								{
+									e1.printStackTrace();
+								}
+	            			}
+	          			}
+	        		}
+	            }
+	    	}
+		});
+  	}
 
-      	try
-      	{
-      		SimpleNode simpleNode = FreshMeat.start();
-      		simpleNode.dump(""); 				
-      	}
-      	catch (ParseException e)
-      	{
-       		System.out.println("Exception: A expressão inserida não está correta, verifique por favor com as instruções abaixo e tente novamente.");
-        	System.out.println(e.getMessage());
-        	System.out.println(e);
-		  	//parser.contParseError = 1;   // não existe recuperação de erros
-			//System.exit(0);			  	
-      	}
-      	catch (Error e)
-      	{
-       		System.out.println("Error: A entrada inserida não é um token válido, revise por favor e tente novamente");
-        	System.out.println(e.getMessage());
-      	}
+  	public static void RunAskella() throws ParseException
+    {
+    	FileReader arql = null;
+      
+        try
+        {
+			arql = new FileReader(window.getFile());
+		}
+		catch (FileNotFoundException e2)
+		{
+			e2.printStackTrace();
+		}
+			BufferedReader arq = new BufferedReader(arql);
+	    try
+	    {
+	      	FreshMeat parser = new FreshMeat(arq);
+	    }
+	    catch (Exception e1)
+	    {
+	      	FreshMeat.ReInit(arq);
+	    }
+	    catch (Error e1)
+   		{
+   		  	FreshMeat.ReInit(arq);
+   		}
+
+        try
+        {
+            SimpleNode simpleNode = FreshMeat.start();
+            simpleNode.dump("");
+            
+			//window.setConsole(console);
+            lnlog(simpleNode.getMsg());
+        }
+        catch (ParseException e)
+        {
+            lnlog("Exception: A express\u00e3o inserida n\u00e3o est\u00e1 correta, verifique por favor com as instru\u00e7\u00f5es abaixo e tente novamente.");
+            lnlog(e.getMessage());
+            //lnlog(e);
+            //parser.contParseError = 1;   // não existe recuperação de erros
+            //System.exit(0);			  	
+        }
+        catch (Error e)
+        {
+            lnlog("Error: A entrada inserida n\u00e3o \u00e9 um token v\u00e1lido ou o arquivo está vazio, revise por favor e tente novamente");
+       		//System.out.println("error");
+            lnlog(e.getMessage());
+        }
 //     	finally
 //    	{
-//      	System.out.println(token_source.foundLexError() + " Lexical Errors found");
-//        	System.out.println(contParseError + " Syntactic Errors found");
+//      	lnlog(token_source.foundLexError() + " Lexical Errors found");
+//        	lnlog(contParseError + " Syntactic Errors found");
 //     	}  
-  	}
+        }
 		
-	static public String im(int x)
+	static private void log(String s)
 	{
-    	int k;
+		console = s;
+		window.setConsole(console);
+  	}
+
+  	static private void lnlog(String s)
+  	{
+  		log(s + "\n");
+  	}
+	
+    static public String im(int x)
+    {
+		int k;
 		String s;
-	    s = tokenImage[x];
-	    k = s.lastIndexOf("\"");
-    	try
-    	{
+		s = tokenImage[x];
+		k = s.lastIndexOf("\u005c"");
+		try
+		{
 	      s = s.substring(1,k);
-    	}
-	   	catch (StringIndexOutOfBoundsException e)
-	   	{
-   	  	}
-	   	return s;
-	  }
-		 
-	  static Token lastError = null;
-	  static boolean eof;    // variável que indica se EOF foi alcançado
-		
-	  // o método abaixo consome tokens até alcançar um que pertença ao conjunto
-	  // de sincronização
-	  static void consumeUntil(RecoverySet g,
-		                 ParseException e,
-		                 String met) throws ParseEOFException,
-		                                    ParseException
-	  {
+		}
+        catch (StringIndexOutOfBoundsException e)
+        {
+        }
+        return s;
+  	}
+
+  	static Token lastError = null;
+  	static boolean eof;    // variável que indica se EOF foi alcançado
+
+  	// o método abaixo consome tokens até alcançar um que pertença ao conjunto
+  	// de sincronização
+  	static void consumeUntil(RecoverySet g,
+	                         ParseException e,
+	                         String met) throws ParseEOFException,
+	                                            ParseException
+ 	{
 		Token tok;
-		System.out.println();
-		System.out.println("*** " + met + " ***");
-		System.out.println("     Conjunto de sincronização: " + g);
-			
-		if (g == null) throw e; // se o conjunto é null, propaga a exceção
-		
-		tok = getToken(1); // pega token corrente
-		while ( ! eof )	{ // se não chegou ao fim do arquivo
-		  if ( g.contains(tok.kind)) {//achou um token no conjunto
-		    System.out.println("     Encontrado token de sincronização: " + 
-		                       im(tok.kind));
-		    break;
-		  }
-		  System.out.println("     Ignorando o token: " + im(tok.kind));
-		  getNextToken();     // pega próximo token       
-	      tok = getToken(1);
-		  if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?   
-		      eof = true;
-		}
-	    if ( tok != lastError)  {
-		  System.out.println(e.getMessage());
-		  lastError = tok;
-		   
-		}
-		if ( eof )
-		  throw new ParseEOFException("Encontrei EOF onde não deveria.");
-	  }
+        //lnlog();
+
+        lnlog("*** " + met + " ***");
+        lnlog("     Conjunto de sincroniza\u00e7\u00e3o: " + g);
+
+        if (g == null) throw e; // se o conjunto é null, propaga a exceção
+
+        tok = getToken(1); // pega token corrente
+
+        while ( ! eof )
+        { // se não chegou ao fim do arquivo
+	      	if ( g.contains(tok.kind))
+	      	{	//achou um token no conjunto
+	            lnlog("     Encontrado token de sincroniza\u00e7\u00e3o: " +
+	                               im(tok.kind));
+	        break;
+	      	}
+	      	lnlog("     Ignorando o token: " + im(tok.kind));
+	      	getNextToken();     // pega próximo token       
+	      	tok = getToken(1);
+	      	if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?   
+	              eof = true;
+        }
+    	if ( tok != lastError)
+    	{
+          	lnlog(e.getMessage());
+          	lastError = tok;
+        }
+        	if ( eof )
+          		throw new ParseEOFException("Encontrei EOF onde n\u00e3o deveria.");
+  }
   
 }
 
@@ -262,12 +328,13 @@ SimpleNode start() :{ RecoverySet recoverySet = First.start; }
   	{
 		(UsingDeclaration())*
 		  
-		<STARTSCRIPT> <DOUBLEPOINTS> <ID> 
-		<LBRACE>
+		StartScript() DoublePoints() Id()
+		LBrace()
 		
 			(Block())+
 		
-		<RBRACE>
+		RBrace()
+  		<EOF>
 		
 		{ return jjtThis; }
 	}
@@ -311,9 +378,7 @@ void Command(): { RecoverySet recoverySet = First.Command; }
 	try
   	{
 			VariableAssignment()
-		
-			//Variable() < ASSIGN > MathExpression() < SEMICOLON >
-		
+				
 		| 	If()
 		 
 		| 	ForTo()
@@ -333,38 +398,108 @@ void Command(): { RecoverySet recoverySet = First.Command; }
 	}
 }
 
-void VariableAssignment(): {}
+void VariableAssignment(): { RecoverySet recoverySet = First.VariableAssignment; }
 {
-	<ID> VariableInit() <SEMICOLON>
+	try
+  	{
+		Id() VariableInit() SemiColon()
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "VariableInit");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}
 }
 
-void VariableInit(): { }
+void VariableInit(): { RecoverySet recoverySet = First.VariableInit; }
 {
-  	<ASSIGN> Y()
+	try
+  	{
+  		Assign() Y()
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "VariableInit");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}
 }
 
-void Y(): { }
+void Y(): { RecoverySet recoverySet = First.Y; }
 {
-  	( (<NUMBER> | <ID>) (DoMath())* ) | W()
+	try
+  	{
+  		( (Number() | Id()) (DoMath())* ) | W()
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "Y");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	} 
 }
 
-void W(): { }
+void W(): { RecoverySet recoverySet = First.W; }
 {
-  	 (<VARCHARDELIMITER> <ID> <VARCHARDELIMITER>) 
+	try
+  	{
+  	 	(StringDelimit() Id() StringDelimit())
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "W");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	} 
 }
 
-void DoMath(): { }
+void DoMath(): { RecoverySet recoverySet = First.DoMath; }
 {
-	 (MathOperator() ExpressionArguments())
+ 	try
+  	{
+	 	(MathOperator() ExpressionArguments())
+	}
+	catch(ParseException e)
+	{
+  		try
+  		{		
+			consumeUntil(recoverySet, e, "DoMath");  
+  		}
+  		catch(ParseEOFException eof)
+  		{
+    
+  		}  
+	}
 }
 
 void If(): { RecoverySet recoverySet = First.If; }
 {
 	try
   	{
-		<IF> LogicExpression() <THEN>
-				(<LBRACE>	Command()	<RBRACE> )
-				(<ELSE>		<LBRACE>		Command()	<RBRACE> )?
+		IF() LogicExpression() Then()
+				(LBrace()	Command()	RBrace() )
+				(Else()		LBrace()		Command()	RBrace() )?
 	}
 	catch(ParseException e)
 	{
@@ -383,10 +518,10 @@ void ForTo(): { RecoverySet recoverySet = First.ForTo; }
 {
 	try
   	{
-		<FOR> VariableAssignment() <TO> ExpressionArguments()
-	 	(<LBRACE>
+		FOR() VariableAssignment() To() ExpressionArguments()
+	 	(LBrace()
 	 		Command()
-	 	<RBRACE> )
+	 	RBrace() )
 	}
 	catch(ParseException e)
 	{
@@ -405,10 +540,10 @@ void While(): { RecoverySet recoverySet = First.While; }
 { 
 	try
   	{
-		<WHILE> LogicExpression()
-	 	(<LBRACE>
+		WHILE() LogicExpression()
+	 	(LBrace()
 	 		Command()
-	 	<RBRACE> )
+	 	RBrace() )
 	}
 	catch(ParseException e)
 	{
@@ -442,33 +577,11 @@ void LogicExpression(): { RecoverySet recoverySet = First.LogicExpression; }
 	}
 }
 
-//void MathExpression() : { /*RecoverySet recoverySet = First.MathExpression; */}
-//{
-//	/*try
-//  	{*/
-//		ExpressionArguments() (MathOperator() ExpressionArguments())+
-//	//}
-//	/*
-//	catch(ParseException e)
-//	{
-//  		try
-//  		{		
-//			consumeUntil(recoverySet, e, "MathExpression");  
-//  		}
-//  		catch(ParseEOFException eof)
-//  		{
-//    
-//  		}  
-//	}
-//	*/
-//	
-//}
-
 void ExpressionArguments(): { RecoverySet recoverySet = First.ExpressionArguments; }
 {
 	try
   	{
-  		< ID > | < NUMBER >
+  		Id() | Number()
 	}
 	catch(ParseException e)
 	{
@@ -533,7 +646,7 @@ void UsingDeclaration(): { RecoverySet recoverySet = First.UsingDeclaration; }
 {
 	try
   	{
-  		(<USING> <ID> <SEMICOLON>)
+  		(<USING> Id() SemiColon())
 	}
 	catch(ParseException e)
 	{
@@ -552,7 +665,7 @@ void VariableDeclaration(): { RecoverySet recoverySet = First.VariableDeclaratio
 {
   	try
   	{
-  		(DataType() (IDList())+ <SEMICOLON>)
+  		(DataType() (IDList())+ SemiColon())
 	}
 	catch(ParseException e)
 	{
@@ -590,7 +703,7 @@ void IDList(): { RecoverySet recoverySet = First.IDList; }
 {
 	try
   	{
-		<ID> (VariableInit())? | <COMMA> <ID> (VariableInit())?
+		Id() (VariableInit())? | <COMMA> Id() (VariableInit())?
 	}
 	catch(ParseException e)
 	{
@@ -604,10 +717,107 @@ void IDList(): { RecoverySet recoverySet = First.IDList; }
 	  	}  
 	}
 }
- 
-//void Semicolon(): { }
-//{
-//  	<SEMICOLON>
-//}
+
+void StartScript(): { }
+{
+  	<STARTSCRIPT>
+}
+
+void DoublePoints(): { }
+{
+  	<DOUBLEPOINTS>
+}
+
+void Id(): { }
+{
+  	<ID>
+}
+
+void LBrace(): { }
+{
+  	<LBRACE>
+}
+
+void RBrace(): { }
+{
+  	<RBRACE>
+}
+
+void SemiColon(): { }
+{
+  	<SEMICOLON>
+}
+
+void Assign(): { }
+{
+  	<ASSIGN>
+}
+
+void Number(): { }
+{
+  	<NUMBER>
+}
+
+void StringDelimit(): { }
+{
+  	<VARCHARDELIMITER>
+}
+
+void IF(): { }
+{
+  	< IF >
+}
+
+void Then(): { }
+{
+  	<THEN>
+}
+
+void Else(): { }
+{
+  	<ELSE>
+}
+
+void FOR(): { }
+{
+  	<FOR>
+}
+
+void To(): { }
+{
+  	<TO>
+}
+
+void WHILE(): { }
+{
+  	<WHILE>
+}
+
+void Sum(): { }
+{
+  	<SUM>
+}
+
+void Minus(): { }
+{
+  	<MINUS>
+}
+
+void Plus(): { }
+{
+  	<PLUS>
+}
+
+void Divide(): { }
+{
+  	<DIVIDE>
+}
+
+
+
+
+
+
+
 
 
