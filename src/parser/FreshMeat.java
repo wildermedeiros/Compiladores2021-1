@@ -12,8 +12,9 @@ import javax.swing.JOptionPane;
 public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshMeatConstants {/*@bgen(jjtree)*/
   protected static JJTFreshMeatState jjtree = new JJTFreshMeatState();
   final static Tela window = new Tela();
+  static private String console = "";
   
-  	private static String myFile = "";
+  	//private static String myFile = "";
         int contParseError = 0; // contador de erros sintáticos
 
         // funo para abertura de arquivo a ser usado como source para leitura de tokens
@@ -28,7 +29,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
         catch(java.io.IOException e)
         {
                 in = null;
-                System.out.println("Arquivo n\u00e3o pode ser aberto.");
+                lnlog("Arquivo n\u00e3o pode ser aberto.");
         }
                 return (in);
         }
@@ -45,7 +46,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 	    catch(java.io.IOException e)
 	    {
 	            in = null;
-	            System.out.println("Arquivo n\u00e3o pode ser aberto.");
+	            lnlog("Arquivo n\u00e3o pode ser aberto.");
 	    }
 	            return (in);
 	    }
@@ -96,26 +97,26 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
         {
                 SimpleNode simpleNode = FreshMeat.start();
                 simpleNode.dump("");
-                window.setMsg(simpleNode.getMsg());
-                //System.out.println(simpleNode.getMsg());
+                window.setConsole(console);
+                //lnlog(simpleNode.getMsg());
         }
         catch (ParseException e)
         {
-                System.out.println("Exception: A express\u00e3o inserida n\u00e3o est\u00e1 correta, verifique por favor com as instru\u00e7\u00f5es abaixo e tente novamente.");
-                System.out.println(e.getMessage());
-                System.out.println(e);
+                lnlog("Exception: A express\u00e3o inserida n\u00e3o est\u00e1 correta, verifique por favor com as instru\u00e7\u00f5es abaixo e tente novamente.");
+                lnlog(e.getMessage());
+                //lnlog(e);
                         //parser.contParseError = 1;   // não existe recuperação de erros
                         //System.exit(0);			  	
         }
         catch (Error e)
         {
-                System.out.println("Error: A entrada inserida n\u00e3o \u00e9 um token v\u00e1lido, revise por favor e tente novamente");
-                System.out.println(e.getMessage());
+                lnlog("Error: A entrada inserida n\u00e3o \u00e9 um token v\u00e1lido, revise por favor e tente novamente");
+                lnlog(e.getMessage());
         }
 //     	finally
 //    	{
-//      	System.out.println(token_source.foundLexError() + " Lexical Errors found");
-//        	System.out.println(contParseError + " Syntactic Errors found");
+//      	lnlog(token_source.foundLexError() + " Lexical Errors found");
+//        	lnlog(contParseError + " Syntactic Errors found");
 //     	}  
         }
   
@@ -180,6 +181,13 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 	                        }
 	                });
 	  }
+	  
+	  static private void log(String s) {
+		  console = console+ s;
+	  }
+	  static private void lnlog(String s){
+		  log(s+"\n");
+	  }
 	
 	        static public String im(int x)
 	        {
@@ -208,27 +216,27 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 	                                                    ParseException
 	          {
 	                Token tok;
-	                System.out.println();
-	                System.out.println("*** " + met + " ***");
-	                System.out.println("     Conjunto de sincroniza\u00e7\u00e3o: " + g);
+	                //lnlog();
+	                lnlog("*** " + met + " ***");
+	                lnlog("     Conjunto de sincroniza\u00e7\u00e3o: " + g);
 	
 	                if (g == null) throw e; // se o conjunto é null, propaga a exceção
 	
 	                tok = getToken(1); // pega token corrente
 	                while ( ! eof ) { // se não chegou ao fim do arquivo
 	                  if ( g.contains(tok.kind)) {//achou um token no conjunto
-	                    System.out.println("     Encontrado token de sincroniza\u00e7\u00e3o: " +
+	                    lnlog("     Encontrado token de sincroniza\u00e7\u00e3o: " +
 	                                       im(tok.kind));
 	                    break;
 	                  }
-	                  System.out.println("     Ignorando o token: " + im(tok.kind));
+	                  lnlog("     Ignorando o token: " + im(tok.kind));
 	                  getNextToken();     // pega próximo token       
 	              tok = getToken(1);
 	                  if (tok.kind == EOF && ! g.contains(EOF) ) // fim da entrada?   
 	                      eof = true;
 	                }
 	            if ( tok != lastError)  {
-	                  System.out.println(e.getMessage());
+	                  lnlog(e.getMessage());
 	                  lastError = tok;
 	
 	                }
@@ -1249,9 +1257,9 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   /** Constructor with InputStream and supplied encoding */
   public FreshMeat(java.io.InputStream stream, String encoding) {
     if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser.  ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
+      lnlog("ERROR: Second call to constructor of static parser.  ");
+      lnlog("       You must either use ReInit() or set the JavaCC option STATIC to false");
+      lnlog("       during parser generation.");
       throw new Error();
     }
     jj_initialized_once = true;
@@ -1281,9 +1289,9 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   /** Constructor. */
   public FreshMeat(java.io.Reader stream) {
     if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
+      lnlog("ERROR: Second call to constructor of static parser. ");
+      lnlog("       You must either use ReInit() or set the JavaCC option STATIC to false");
+      lnlog("       during parser generation.");
       throw new Error();
     }
     jj_initialized_once = true;
@@ -1309,9 +1317,9 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   /** Constructor with generated Token Manager. */
   public FreshMeat(FreshMeatTokenManager tm) {
     if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
+      lnlog("ERROR: Second call to constructor of static parser. ");
+      lnlog("       You must either use ReInit() or set the JavaCC option STATIC to false");
+      lnlog("       during parser generation.");
       throw new Error();
     }
     jj_initialized_once = true;
@@ -1428,8 +1436,8 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 
   static private void trace_call(String s) {
     if (trace_enabled) {
-      for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
-      System.out.println("Call:   " + s);
+      for (int i = 0; i < trace_indent; i++) { log(" "); }
+      lnlog("Call:   " + s);
     }
     trace_indent = trace_indent + 2;
   }
@@ -1437,30 +1445,30 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   static private void trace_return(String s) {
     trace_indent = trace_indent - 2;
     if (trace_enabled) {
-      for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
-      System.out.println("Return: " + s);
+      for (int i = 0; i < trace_indent; i++) { log(" "); }
+      lnlog("Return: " + s);
     }
   }
 
   static private void trace_token(Token t, String where) {
     if (trace_enabled) {
-      for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
-      System.out.print("Consumed token: <" + tokenImage[t.kind]);
+      for (int i = 0; i < trace_indent; i++) { log(" "); }
+      log("Consumed token: <" + tokenImage[t.kind]);
       if (t.kind != 0 && !tokenImage[t.kind].equals("\"" + t.image + "\"")) {
-        System.out.print(": \"" + t.image + "\"");
+        log(": \"" + t.image + "\"");
       }
-      System.out.println(" at line " + t.beginLine + " column " + t.beginColumn + ">" + where);
+      lnlog(" at line " + t.beginLine + " column " + t.beginColumn + ">" + where);
     }
   }
 
   static private void trace_scan(Token t1, int t2) {
     if (trace_enabled) {
-      for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
-      System.out.print("Visited token: <" + tokenImage[t1.kind]);
+      for (int i = 0; i < trace_indent; i++) { log(" "); }
+      log("Visited token: <" + tokenImage[t1.kind]);
       if (t1.kind != 0 && !tokenImage[t1.kind].equals("\"" + t1.image + "\"")) {
-        System.out.print(": \"" + t1.image + "\"");
+        log(": \"" + t1.image + "\"");
       }
-      System.out.println(" at line " + t1.beginLine + " column " + t1.beginColumn + ">; Expected token: <" + tokenImage[t2] + ">");
+      lnlog(" at line " + t1.beginLine + " column " + t1.beginColumn + ">; Expected token: <" + tokenImage[t2] + ">");
     }
   }
 
