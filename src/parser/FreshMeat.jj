@@ -948,10 +948,10 @@ void MathOperator(): {/*@bgen(jjtree) MathOperator */
 /*@egen*/
 	try
   	{
-			< SUM >
-		|	< MINUS >
-		|	< PLUS >
-		|	< DIVIDE >
+		 	Sum()
+		|	Minus()
+		|	Plus()
+		|	Divide()
 	}
 	catch(ParseException e)
 	{
@@ -964,6 +964,20 @@ void MathOperator(): {/*@bgen(jjtree) MathOperator */
     
   		}  
 	}/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -982,12 +996,12 @@ void LogicOperator(): {/*@bgen(jjtree) LogicOperator */
 /*@egen*/
 	try
   	{
-	  		< GREATER >
-		|	< LESS>
-		|	< GREATEREQUAL>
-		|	< LESSEQUAL>
-		|	< DIFFERENCE>
-		|	< EQUAL>
+	  		Greater()
+		|	Less()
+		|	GreaterEqual()
+		|	LessEqual()
+		|	Difference()
+		|	Equal()
 	}
 	catch(ParseException e)
 	{
@@ -1000,6 +1014,20 @@ void LogicOperator(): {/*@bgen(jjtree) LogicOperator */
     
   		}  
 	}/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -1018,7 +1046,7 @@ void UsingDeclaration(): {/*@bgen(jjtree) UsingDeclaration */
 /*@egen*/
 	try
   	{
-  		(<USING> Id() SemiColon())
+  		(Using() Id() SemiColon())
 	}
 	catch(ParseException e)
 	{
@@ -1108,7 +1136,7 @@ void DataType(): {/*@bgen(jjtree) DataType */
 /*@egen*/
   	try
   	{
-  		< INTEGERTYPE > | < STRINGTYPE > | < BOOLTYPE >
+  		IntegerType() | StringType() | BoolType()
 	}
 	catch(ParseException e)
 	{
@@ -1121,6 +1149,20 @@ void DataType(): {/*@bgen(jjtree) DataType */
 
 	  	}  
 	}/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -1139,7 +1181,7 @@ void IDList(): {/*@bgen(jjtree) IDList */
 /*@egen*/
 	try
   	{
-		Id() (VariableInit())? | <COMMA> Id() (VariableInit())?
+		Id() (VariableInit())? | Comma() Id() (VariableInit())?
 	}
 	catch(ParseException e)
 	{
@@ -1497,6 +1539,211 @@ void Divide(): {/*@bgen(jjtree) Divide */
 /*@egen*/
 }
 
+void Greater(): {/*@bgen(jjtree) Greater */
+  SimpleNode jjtn000 = new SimpleNode(JJTGREATER);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) Greater */
+        try {
+/*@egen*/
+  	<GREATER>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void Less(): {/*@bgen(jjtree) Less */
+  SimpleNode jjtn000 = new SimpleNode(JJTLESS);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) Less */
+        try {
+/*@egen*/
+  	<LESS>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void GreaterEqual(): {/*@bgen(jjtree) GreaterEqual */
+  SimpleNode jjtn000 = new SimpleNode(JJTGREATEREQUAL);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) GreaterEqual */
+        try {
+/*@egen*/
+  	<GREATEREQUAL>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void LessEqual(): {/*@bgen(jjtree) LessEqual */
+  SimpleNode jjtn000 = new SimpleNode(JJTLESSEQUAL);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) LessEqual */
+        try {
+/*@egen*/
+  	<LESSEQUAL>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void Difference(): {/*@bgen(jjtree) Difference */
+  SimpleNode jjtn000 = new SimpleNode(JJTDIFFERENCE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) Difference */
+        try {
+/*@egen*/
+  	<DIFFERENCE>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void Equal(): {/*@bgen(jjtree) Equal */
+  SimpleNode jjtn000 = new SimpleNode(JJTEQUAL);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) Equal */
+        try {
+/*@egen*/
+  	<EQUAL>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void Using(): {/*@bgen(jjtree) Using */
+  SimpleNode jjtn000 = new SimpleNode(JJTUSING);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) Using */
+        try {
+/*@egen*/
+	<USING>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void IntegerType(): {/*@bgen(jjtree) IntegerType */
+  SimpleNode jjtn000 = new SimpleNode(JJTINTEGERTYPE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) IntegerType */
+        try {
+/*@egen*/
+	<INTEGERTYPE>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void StringType(): {/*@bgen(jjtree) StringType */
+  SimpleNode jjtn000 = new SimpleNode(JJTSTRINGTYPE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) StringType */
+        try {
+/*@egen*/
+	<STRINGTYPE>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void BoolType(): {/*@bgen(jjtree) BoolType */
+  SimpleNode jjtn000 = new SimpleNode(JJTBOOLTYPE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) BoolType */
+        try {
+/*@egen*/
+	<BOOLTYPE>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+void Comma(): {/*@bgen(jjtree) Comma */
+  SimpleNode jjtn000 = new SimpleNode(JJTCOMMA);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/ }
+{/*@bgen(jjtree) Comma */
+        try {
+/*@egen*/
+	<COMMA>/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  		
 
 
 

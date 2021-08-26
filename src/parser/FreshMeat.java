@@ -895,16 +895,16 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
       try {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case SUM:
-          jj_consume_token(SUM);
+          Sum();
           break;
         case MINUS:
-          jj_consume_token(MINUS);
+          Minus();
           break;
         case PLUS:
-          jj_consume_token(PLUS);
+          Plus();
           break;
         case DIVIDE:
-          jj_consume_token(DIVIDE);
+          Divide();
           break;
         default:
           jj_la1[10] = jj_gen;
@@ -921,6 +921,20 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 
                 }
       }
+    } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -937,22 +951,22 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
       try {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case GREATER:
-          jj_consume_token(GREATER);
+          Greater();
           break;
         case LESS:
-          jj_consume_token(LESS);
+          Less();
           break;
         case GREATEREQUAL:
-          jj_consume_token(GREATEREQUAL);
+          GreaterEqual();
           break;
         case LESSEQUAL:
-          jj_consume_token(LESSEQUAL);
+          LessEqual();
           break;
         case DIFFERENCE:
-          jj_consume_token(DIFFERENCE);
+          Difference();
           break;
         case EQUAL:
-          jj_consume_token(EQUAL);
+          Equal();
           break;
         default:
           jj_la1[11] = jj_gen;
@@ -969,6 +983,20 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 
                 }
       }
+    } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -983,7 +1011,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
                            jjtree.openNodeScope(jjtn000);RecoverySet recoverySet = First.UsingDeclaration;
     try {
       try {
-        jj_consume_token(USING);
+        Using();
         Id();
         SemiColon();
       } catch (ParseException e) {
@@ -1079,13 +1107,13 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
       try {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case INTEGERTYPE:
-          jj_consume_token(INTEGERTYPE);
+          IntegerType();
           break;
         case STRINGTYPE:
-          jj_consume_token(STRINGTYPE);
+          StringType();
           break;
         case BOOLTYPE:
-          jj_consume_token(BOOLTYPE);
+          BoolType();
           break;
         default:
           jj_la1[13] = jj_gen;
@@ -1102,6 +1130,20 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
 
                 }
       }
+    } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            {if (true) throw (RuntimeException)jjte000;}
+          }
+          if (jjte000 instanceof ParseException) {
+            {if (true) throw (ParseException)jjte000;}
+          }
+          {if (true) throw (Error)jjte000;}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -1129,7 +1171,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
           }
           break;
         case COMMA:
-          jj_consume_token(COMMA);
+          Comma();
           Id();
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case ASSIGN:
@@ -1435,6 +1477,160 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
   jjtree.openNodeScope(jjtn000);
     try {
       jj_consume_token(DIVIDE);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void Greater() throws ParseException {
+                 /*@bgen(jjtree) Greater */
+  SimpleNode jjtn000 = new SimpleNode(JJTGREATER);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(GREATER);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void Less() throws ParseException {
+              /*@bgen(jjtree) Less */
+  SimpleNode jjtn000 = new SimpleNode(JJTLESS);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(LESS);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void GreaterEqual() throws ParseException {
+                      /*@bgen(jjtree) GreaterEqual */
+  SimpleNode jjtn000 = new SimpleNode(JJTGREATEREQUAL);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(GREATEREQUAL);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void LessEqual() throws ParseException {
+                   /*@bgen(jjtree) LessEqual */
+  SimpleNode jjtn000 = new SimpleNode(JJTLESSEQUAL);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(LESSEQUAL);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void Difference() throws ParseException {
+                    /*@bgen(jjtree) Difference */
+  SimpleNode jjtn000 = new SimpleNode(JJTDIFFERENCE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(DIFFERENCE);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void Equal() throws ParseException {
+               /*@bgen(jjtree) Equal */
+  SimpleNode jjtn000 = new SimpleNode(JJTEQUAL);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(EQUAL);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void Using() throws ParseException {
+               /*@bgen(jjtree) Using */
+  SimpleNode jjtn000 = new SimpleNode(JJTUSING);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(USING);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void IntegerType() throws ParseException {
+                     /*@bgen(jjtree) IntegerType */
+  SimpleNode jjtn000 = new SimpleNode(JJTINTEGERTYPE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(INTEGERTYPE);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void StringType() throws ParseException {
+                    /*@bgen(jjtree) StringType */
+  SimpleNode jjtn000 = new SimpleNode(JJTSTRINGTYPE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(STRINGTYPE);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void BoolType() throws ParseException {
+                  /*@bgen(jjtree) BoolType */
+  SimpleNode jjtn000 = new SimpleNode(JJTBOOLTYPE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(BOOLTYPE);
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+  }
+
+  static final public void Comma() throws ParseException {
+               /*@bgen(jjtree) Comma */
+  SimpleNode jjtn000 = new SimpleNode(JJTCOMMA);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+    try {
+      jj_consume_token(COMMA);
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);

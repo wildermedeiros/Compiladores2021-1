@@ -600,10 +600,10 @@ void MathOperator(): { RecoverySet recoverySet = First.MathOperator; }
 {
 	try
   	{
-			< SUM >
-		|	< MINUS >
-		|	< PLUS >
-		|	< DIVIDE >
+		 	Sum()
+		|	Minus()
+		|	Plus()
+		|	Divide()
 	}
 	catch(ParseException e)
 	{
@@ -622,12 +622,12 @@ void LogicOperator(): { RecoverySet recoverySet = First.LogicOperator; }
 {
 	try
   	{
-	  		< GREATER >
-		|	< LESS>
-		|	< GREATEREQUAL>
-		|	< LESSEQUAL>
-		|	< DIFFERENCE>
-		|	< EQUAL>
+	  		Greater()
+		|	Less()
+		|	GreaterEqual()
+		|	LessEqual()
+		|	Difference()
+		|	Equal()
 	}
 	catch(ParseException e)
 	{
@@ -646,7 +646,7 @@ void UsingDeclaration(): { RecoverySet recoverySet = First.UsingDeclaration; }
 {
 	try
   	{
-  		(<USING> Id() SemiColon())
+  		(Using() Id() SemiColon())
 	}
 	catch(ParseException e)
 	{
@@ -684,7 +684,7 @@ void DataType(): { RecoverySet recoverySet = First.DataType;}
 {
   	try
   	{
-  		< INTEGERTYPE > | < STRINGTYPE > | < BOOLTYPE >
+  		IntegerType() | StringType() | BoolType()
 	}
 	catch(ParseException e)
 	{
@@ -703,7 +703,7 @@ void IDList(): { RecoverySet recoverySet = First.IDList; }
 {
 	try
   	{
-		Id() (VariableInit())? | <COMMA> Id() (VariableInit())?
+		Id() (VariableInit())? | Comma() Id() (VariableInit())?
 	}
 	catch(ParseException e)
 	{
@@ -813,6 +813,79 @@ void Divide(): { }
   	<DIVIDE>
 }
 
+void Greater(): { }
+{
+  	<GREATER>
+}
+
+void Less(): { }
+{
+  	<LESS>
+}
+
+void GreaterEqual(): { }
+{
+  	<GREATEREQUAL>
+}
+
+void LessEqual(): { }
+{
+  	<LESSEQUAL>
+}
+
+void Difference(): { }
+{
+  	<DIFFERENCE>
+}
+
+void Equal(): { }
+{
+  	<EQUAL>
+}
+
+void Using(): { }
+{
+	<USING>
+}
+
+void IntegerType(): { }
+{
+	<INTEGERTYPE>
+}
+
+void StringType(): { }
+{
+	<STRINGTYPE>
+}
+
+void BoolType(): { }
+{
+	<BOOLTYPE>
+}
+
+void Comma(): { }
+{
+	<COMMA>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  		
 
 
 

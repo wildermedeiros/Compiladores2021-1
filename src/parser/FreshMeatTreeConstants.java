@@ -39,6 +39,17 @@ public interface FreshMeatTreeConstants
   public int JJTMINUS = 33;
   public int JJTPLUS = 34;
   public int JJTDIVIDE = 35;
+  public int JJTGREATER = 36;
+  public int JJTLESS = 37;
+  public int JJTGREATEREQUAL = 38;
+  public int JJTLESSEQUAL = 39;
+  public int JJTDIFFERENCE = 40;
+  public int JJTEQUAL = 41;
+  public int JJTUSING = 42;
+  public int JJTINTEGERTYPE = 43;
+  public int JJTSTRINGTYPE = 44;
+  public int JJTBOOLTYPE = 45;
+  public int JJTCOMMA = 46;
 
 
   public String[] jjtNodeName = {
@@ -78,6 +89,17 @@ public interface FreshMeatTreeConstants
     "Minus",
     "Plus",
     "Divide",
+    "Greater",
+    "Less",
+    "GreaterEqual",
+    "LessEqual",
+    "Difference",
+    "Equal",
+    "Using",
+    "IntegerType",
+    "StringType",
+    "BoolType",
+    "Comma",
   };
 }
-/* JavaCC - OriginalChecksum=7b011061824196489fb5cabbeac03073 (do not edit this line) */
+/* JavaCC - OriginalChecksum=2c703057c61e371516abbcd41550ebdd (do not edit this line) */
