@@ -90,6 +90,7 @@ public class FreshMeat
 								{
 									e1.printStackTrace();
 								}
+								
 	            			}
 	          			}
 	        		}
@@ -114,6 +115,7 @@ public class FreshMeat
 	    try
 	    {
 	      	FreshMeat parser = new FreshMeat(arq);
+	      	JOptionPane.showMessageDialog(tela, "Compilado com sucesso!");
 	    }
 	    catch (Exception e1)
 	    {

@@ -371,7 +371,7 @@ public class Tela extends JFrame {
         
         status = new JLabel();
         status.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        status.setBounds(10, 20, 960, 280);
+        status.setBounds(10, 495, 960, 280);
         status.setIcon(new ImageIcon("C:\\comp\\tree.png"));
         getContentPane().add(status);
         status.setVisible(false);
