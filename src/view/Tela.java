@@ -310,7 +310,7 @@ public class Tela extends JFrame {
 
 
         btnArvore = new JButton("Arvore Sintatica");
-        btnArvore.setBounds(120, 460, 145, 21);
+        btnArvore.setBounds(110, 460, 145, 21);
         getContentPane().add(btnArvore);
         btnArvore.addActionListener(new ActionListener() {
             @Override
@@ -324,13 +324,13 @@ public class Tela extends JFrame {
         btnArvore.setBackground(SystemColor.activeCaptionBorder);
 
         btnGrafico = new JButton("Grafico da Arvore Sintatica");
-        btnGrafico.setBounds(200, 460, 180, 21);
+        btnGrafico.setBounds(255, 460, 180, 21);
         getContentPane().add(btnGrafico);
         btnGrafico.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 JFileChooser jc = new JFileChooser();
-                jc.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
+                jc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 int i= jc.showSaveDialog(null);
 
                 //Se o retorno for == 1 quer dizer que o usuario apertou em cancelar
@@ -375,7 +375,17 @@ public class Tela extends JFrame {
         status.setIcon(new ImageIcon("C:\\comp\\tree.png"));
         getContentPane().add(status);
         status.setVisible(false);
-        panel_3.add(status);
+        //panel_3.add(status);
+        
+        scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(0, 20, 960, 280);
+        panel_3.add(scrollPane_1);
+
+        textMsg = new JTextArea();
+        textMsg.setForeground(new Color(0, 128, 0));
+        textMsg.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
+        textMsg.setEditable(false);
+        scrollPane_1.setViewportView(textMsg);
 
         JLabel lblAnaliseSintatica = new JLabel("Arvore Sintatica");
         lblAnaliseSintatica.setBounds(20, 0, 100, 14);
