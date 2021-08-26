@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 
 public class Tela extends JFrame {
 
@@ -48,7 +49,8 @@ public class Tela extends JFrame {
     private JButton btnConsole;
     private JButton btnArvore;
     private JButton btnError; 
-    JLabel status;
+    private JLabel status;
+    private JButton btnGrafico;
 
     public Tela() throws HeadlessException {
 
@@ -301,14 +303,14 @@ public class Tela extends JFrame {
                 //System.out.println("mostrar console");
                 panel_2.setVisible(true);
                 panel_3.setVisible(false);
-                //status.setVisible(false);
+                status.setVisible(false);
             }
         });
         btnConsole.setBackground(SystemColor.activeCaptionBorder);
 
 
         btnArvore = new JButton("Arvore Sintatica");
-        btnArvore.setBounds(120, 460, 120, 21);
+        btnArvore.setBounds(120, 460, 145, 21);
         getContentPane().add(btnArvore);
         btnArvore.addActionListener(new ActionListener() {
             @Override
@@ -316,10 +318,49 @@ public class Tela extends JFrame {
                 //System.out.println("mostrar arvore");
                 panel_2.setVisible(false);
                 panel_3.setVisible(true);
-                //status.setVisible(true);
+                status.setVisible(false);
             }
         });
         btnArvore.setBackground(SystemColor.activeCaptionBorder);
+
+        btnGrafico = new JButton("Grafico da Arvore Sintatica");
+        btnGrafico.setBounds(200, 460, 180, 21);
+        getContentPane().add(btnGrafico);
+        btnGrafico.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                JFileChooser jc = new JFileChooser();
+                jc.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
+                int i= jc.showSaveDialog(null);
+
+                //Se o retorno for == 1 quer dizer que o usuario apertou em cancelar
+                // Se não, ele escreveu o nome do arquivo, ou selecionou o arquivo que queira salvar
+                if(i!=1) {
+                    // Pega o arquivo selecionado ou novo
+                    file = jc.getSelectedFile();
+                    CreateFile create = new CreateFile();
+
+                    create.openFile(file);
+                    create.addRecords(textMsg.getText());
+                    create.closeFile();
+                    //Fecha o arquivo
+
+                    try {
+                        Process exec = Runtime.getRuntime().exec( "python3 C:\\comp\\treestack.py" );
+                    } catch(IOException exp){
+                        exp.printStackTrace();
+                    }
+                    
+                    status.setIcon(new ImageIcon("C:\\comp\\tree.png"));
+
+                }
+
+                panel_2.setVisible(false);
+                panel_3.setVisible(false);
+                status.setVisible(true);
+
+            }
+        });
 
 
         panel_3 = new JPanel();
@@ -331,9 +372,9 @@ public class Tela extends JFrame {
         status = new JLabel();
         status.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         status.setBounds(10, 20, 960, 280);
-        status.setIcon(new ImageIcon("D:\\tree.png"));
-        //getContentPane().add(status);
-        //status.setVisible(false);
+        status.setIcon(new ImageIcon("C:\\comp\\tree.png"));
+        getContentPane().add(status);
+        status.setVisible(false);
         panel_3.add(status);
 
         JLabel lblAnaliseSintatica = new JLabel("Arvore Sintatica");
