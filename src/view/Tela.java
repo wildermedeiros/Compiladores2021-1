@@ -47,7 +47,8 @@ public class Tela extends JFrame {
     private JPanel jPanelError;
     private JButton btnConsole;
     private JButton btnArvore;
-    private JButton btnError;
+    private JButton btnError; 
+    JLabel status;
 
     public Tela() throws HeadlessException {
 
@@ -297,8 +298,10 @@ public class Tela extends JFrame {
         btnConsole.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("mostrar console");
+                //System.out.println("mostrar console");
+                panel_2.setVisible(true);
                 panel_3.setVisible(false);
+                //status.setVisible(false);
             }
         });
         btnConsole.setBackground(SystemColor.activeCaptionBorder);
@@ -310,8 +313,10 @@ public class Tela extends JFrame {
         btnArvore.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("mostrar arvore");
+                //System.out.println("mostrar arvore");
+                panel_2.setVisible(false);
                 panel_3.setVisible(true);
+                //status.setVisible(true);
             }
         });
         btnArvore.setBackground(SystemColor.activeCaptionBorder);
@@ -322,16 +327,14 @@ public class Tela extends JFrame {
         getContentPane().add(panel_3);
         panel_3.setLayout(null);
         panel_3.setVisible(false);
-
-        scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(0, 20, 960, 280);
-        panel_3.add(scrollPane_1);
-
-        textMsg = new JTextArea();
-        textMsg.setForeground(new Color(0, 128, 0));
-        textMsg.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
-        textMsg.setEditable(false);
-        scrollPane_1.setViewportView(textMsg);
+        
+        status = new JLabel();
+        status.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        status.setBounds(10, 20, 960, 280);
+        status.setIcon(new ImageIcon("D:\\tree.png"));
+        //getContentPane().add(status);
+        //status.setVisible(false);
+        panel_3.add(status);
 
         JLabel lblAnaliseSintatica = new JLabel("Arvore Sintatica");
         lblAnaliseSintatica.setBounds(20, 0, 100, 14);
@@ -385,6 +388,7 @@ public class Tela extends JFrame {
     /*=== Funçao para adicionar msg no console ===*/
     public void setConsole(String msg){
         textConsole.append(msg);
+        System.out.println(msg);
     }
 
     /*=== Funçao para adicionar msg no campo de msg ===*/
@@ -417,7 +421,8 @@ public class Tela extends JFrame {
 
     public void setVazioConsoleMsg(){
         textConsole.setText("");
-        textMsg.setText("");
+        //textMsg.setText("");
+        
     }
 
     //Salvar se o arquivo ja existe
