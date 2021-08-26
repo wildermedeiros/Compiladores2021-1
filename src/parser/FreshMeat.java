@@ -79,6 +79,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
                                                                 {
                                                                         e1.printStackTrace();
                                                                 }
+
                                         }
                                         }
                                 }
@@ -103,6 +104,7 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
             try
             {
                 FreshMeat parser = new FreshMeat(arq);
+                JOptionPane.showMessageDialog(window, "Compilado com sucesso!");
             }
             catch (Exception e1)
             {
@@ -116,10 +118,9 @@ public class FreshMeat/*@bgen(jjtree)*/implements FreshMeatTreeConstants, FreshM
         try
         {
             SimpleNode simpleNode = FreshMeat.start();
-            simpleNode.dump("");
+            simpleNode.dump("", window);
+            //;
 
-                        //window.setConsole(console);
-            lnlog(simpleNode.getMsg());
         }
         catch (ParseException e)
         {

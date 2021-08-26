@@ -66,14 +66,17 @@ class SimpleNode implements Node {
   /* Override this method if you want to customize how the node dumps
      out its children. */
 
-  public void dump(String prefix) {
+  public void dump(String prefix, Tela window) {
+	  Tela tela = window;
     System.out.println(toString(prefix));
+	  tela.setMsg(toString(prefix)+"\n");
+
     this.msg = this.msg + prefix;
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         SimpleNode n = (SimpleNode)children[i];
         if (n != null) {
-          n.dump(prefix + " ");
+          n.dump(prefix + " ", tela);
         }
       }
     }

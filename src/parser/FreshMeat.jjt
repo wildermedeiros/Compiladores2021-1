@@ -115,7 +115,7 @@ public class FreshMeat
 	    try
 	    {
 	      	FreshMeat parser = new FreshMeat(arq);
-	      	JOptionPane.showMessageDialog(tela, "Compilado com sucesso!");
+	      	JOptionPane.showMessageDialog(window, "Compilado com sucesso!");
 	    }
 	    catch (Exception e1)
 	    {
@@ -129,11 +129,10 @@ public class FreshMeat
         try
         {
             SimpleNode simpleNode = FreshMeat.start();
-            simpleNode.dump("");
-            
-			//window.setConsole(console);
-            lnlog(simpleNode.getMsg());
-        }
+            simpleNode.dump("", window);
+            //;
+
+      	}
         catch (ParseException e)
         {
             lnlog("Exception: A express\u00e3o inserida n\u00e3o est\u00e1 correta, verifique por favor com as instru\u00e7\u00f5es abaixo e tente novamente.");
